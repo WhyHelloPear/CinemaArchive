@@ -10,4 +10,11 @@ namespace TBD
 
         public string? Summary { get; set; }
     }
+
+    public class RandomNumber
+    {
+
+        public int Value { get; set; }
+
+    }
 }

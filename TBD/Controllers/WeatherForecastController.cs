@@ -29,5 +29,14 @@ namespace TBD.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("random")]
+        public IEnumerable<RandomNumber> GetRandomNumbers()
+        {
+            return new List<RandomNumber>
+            {
+                new RandomNumber{Value = 0},
+            };
+        }
     }
 }
