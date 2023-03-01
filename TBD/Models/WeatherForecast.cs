@@ -1,4 +1,4 @@
-namespace TBD
+namespace TBD.Models
 {
     public class WeatherForecast
     {

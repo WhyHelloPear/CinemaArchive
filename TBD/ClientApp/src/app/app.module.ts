@@ -9,7 +9,6 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { SudokuComponent } from './sudoku/sudoku.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { SudokuComponent } from './sudoku/sudoku.component';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    SudokuComponent,
     FetchDataComponent
   ],
   imports: [
@@ -28,7 +26,6 @@ import { SudokuComponent } from './sudoku/sudoku.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'sudoku', component: SudokuComponent },
     ])
   ],
   providers: [],
