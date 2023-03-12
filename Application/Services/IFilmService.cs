@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Application.DTOs;
 
-namespace Application.Services
+namespace Core.Application.Services
 {
-    internal interface IFilmService
+    public interface IFilmService
     {
+        Task<IQueryable<FilmDto>> GetFilms();
     }
 }
