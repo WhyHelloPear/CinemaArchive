@@ -1,20 +1,24 @@
-﻿using Core.Application.DTOs;
+﻿using AutoMapper;
+using Core.Application.DTOs;
 using Domain.Contracts;
 
 namespace Core.Application.Services
 {
     public class FilmService : IFilmService
     {
-        private readonly IFilmRepository filmRepository;
+        private readonly IMapper _mapper;
+        private readonly IFilmRepository _filmRepository;
 
-        public FilmService(IFilmRepository filmRepository)
+        public FilmService(IFilmRepository filmRepository, IMapper mapper)
         {
-            this.filmRepository = filmRepository;
+            _mapper = mapper;
+            _filmRepository = filmRepository;
         }
 
-        Task<IQueryable<FilmDto>> IFilmService.GetFilms()
+        public async Task<IEnumerable<FilmDto>> GetFilms()
         {
-            throw new NotImplementedException();
+
+            return Enumerable.Empty<FilmDto>();
         }
     }
 }

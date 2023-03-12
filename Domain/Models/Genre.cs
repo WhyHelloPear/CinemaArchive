@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Models
+namespace Core.Domain.Models
 {
     public class Genre
     {

@@ -1,4 +1,4 @@
-﻿using Domain.Models;
+﻿using Core.Domain.Models;
 using FluentResults;
 
 namespace Domain.Contracts
@@ -6,7 +6,7 @@ namespace Domain.Contracts
     public interface IPersonRepository
     {
         //Person Methods
-        Task<IQueryable<Person>> GetPeople();
+        Task<IEnumerable<Person>> GetPeople();
         Task<Result<int>> DeletePerson(int personId);
         Task<Result<int>> InsertPerson(Person person);
         Task<Result<int>> UpdatePerson(Person person);

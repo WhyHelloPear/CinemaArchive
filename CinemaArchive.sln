@@ -5,11 +5,11 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "UI\UI.csproj", "{028C33CB-8BD1-4629-B689-69CBE4820AD6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{6B786523-683D-407E-A0A2-2756835844F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Domain", "Domain\Core.Domain.csproj", "{6B786523-683D-407E-A0A2-2756835844F7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Application", "Application\Core.Application.csproj", "{4DA4436E-69EA-4A16-BDD5-B5425EF6EF1C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{1B3D07EE-E2DE-49CF-B516-9E6D0BE07E5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.DataAccess", "DataAccess\Infrastructure.DataAccess.csproj", "{1B3D07EE-E2DE-49CF-B516-9E6D0BE07E5F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{719952B0-0249-4765-B0B5-2D446745A635}"
 EndProject

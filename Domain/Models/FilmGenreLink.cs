@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Models
+namespace Core.Domain.Models
 {
     public class FilmGenreLink
     {

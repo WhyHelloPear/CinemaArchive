@@ -4,6 +4,6 @@ namespace Core.Application.Services
 {
     public interface IFilmService
     {
-        Task<IQueryable<FilmDto>> GetFilms();
+        Task<IEnumerable<FilmDto>> GetFilms();
     }
 }
