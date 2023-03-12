@@ -15,6 +15,7 @@ builder.Services.AddScoped<IFilmService, FilmService>();
 
 builder.Services.AddAutoMapper(typeof(MappingConfiguration).Assembly);
 builder.Services.AddAutoMapper(typeof(RepoConfig).Assembly);
+builder.Services.AddAutoMapper(typeof(UIMapper).Assembly);
 
 var app = builder.Build();
 

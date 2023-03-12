@@ -1,7 +1,7 @@
-﻿using Core.Application.DTOs;
+﻿using AutoMapper;
 using Core.Application.Services;
-using Geocoding;
 using Microsoft.AspNetCore.Mvc;
+using UI.ViewModels;
 
 namespace TBD.Controllers
 {
@@ -9,19 +9,21 @@ namespace TBD.Controllers
     [Route("[controller]")]
     public class HomeController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly IFilmService _filmService;
 
-        public HomeController(IFilmService filmService)
+        public HomeController(IFilmService filmService, IMapper mapper)
         {
             _filmService = filmService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FilmDto>>> GetMyData()
+        public async Task<ActionResult<List<FilmViewModel>>> GetMyData()
         {
             var myData = await _filmService.GetFilms();
 
-            return Ok(myData);
+            return Ok(_mapper.Map<List<FilmViewModel>>(myData));
         }
     }
 }
