@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TBD", "TBD.csproj", "{028C33CB-8BD1-4629-B689-69CBE4820AD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TBD", "TBD.csproj", "{028C33CB-8BD1-4629-B689-69CBE4820AD6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B64FD8FC-D478-4840-B37C-946CF08E497A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\Domain\Domain.csproj", "{6B786523-683D-407E-A0A2-2756835844F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{7B02B775-CF73-4BCC-9FEE-B20C0E74DDE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +21,16 @@ Global
 		{028C33CB-8BD1-4629-B689-69CBE4820AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{028C33CB-8BD1-4629-B689-69CBE4820AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{028C33CB-8BD1-4629-B689-69CBE4820AD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B786523-683D-407E-A0A2-2756835844F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B786523-683D-407E-A0A2-2756835844F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B786523-683D-407E-A0A2-2756835844F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B786523-683D-407E-A0A2-2756835844F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6B786523-683D-407E-A0A2-2756835844F7} = {B64FD8FC-D478-4840-B37C-946CF08E497A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CDF05E9-EA97-4409-8240-DFA0B1C4D4CC}
