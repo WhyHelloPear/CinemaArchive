@@ -1,8 +1,20 @@
+using AutoMapper;
+using Core.Application.Services;
+using Domain.Contracts;
+using Infrastructure.DataAccess.Contexts;
+using Infrastructure.DataAccess.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<CinemaArchiveDbContext>();
+builder.Services.AddScoped<IFilmRepository, FilmRepository>();
+builder.Services.AddScoped<IFilmService, FilmService>();
+
+builder.Services.AddAutoMapper(typeof(MappingConfiguration).Assembly);
+builder.Services.AddAutoMapper(typeof(RepoConfig).Assembly);
 
 var app = builder.Build();
 

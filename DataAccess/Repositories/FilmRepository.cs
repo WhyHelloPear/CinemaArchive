@@ -1,17 +1,23 @@
-﻿using Core.Domain.Models;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Core.Domain.Models;
 using Domain.Contracts;
 using FluentResults;
 using Infrastructure.DataAccess.Contexts;
+using Infrastructure.DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataAccess.Repositories
 {
     public class FilmRepository : IFilmRepository
     {
+        private readonly IMapper _mapper;
         private readonly CinemaArchiveDbContext _dbContext;
 
-        public FilmRepository(CinemaArchiveDbContext dbContext)
+        public FilmRepository(CinemaArchiveDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public Task<Result<int>> AddFilm(Film newFilm)
@@ -44,10 +50,10 @@ namespace Infrastructure.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Film>> GetFilms()
+        public Task<List<Film>> GetFilms()
         {
-            throw new NotImplementedException();
-        }
+            return _dbContext.FilmEntities.ProjectTo<Film>(_mapper.ConfigurationProvider).ToListAsync();
+    }
 
         public Task<IEnumerable<Genre>> GetGenres()
         {

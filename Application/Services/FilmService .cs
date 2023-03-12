@@ -15,10 +15,10 @@ namespace Core.Application.Services
             _filmRepository = filmRepository;
         }
 
-        public async Task<IEnumerable<FilmDto>> GetFilms()
+        public async Task<List<FilmDto>> GetFilms()
         {
-
-            return Enumerable.Empty<FilmDto>();
+            var films = await _filmRepository.GetFilms();
+            return _mapper.Map<List<FilmDto>>(films);
         }
     }
 }

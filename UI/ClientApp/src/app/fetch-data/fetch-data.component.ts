@@ -12,7 +12,15 @@ export class FetchDataComponent {
     http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
       this.forecasts = result;
     }, error => console.error(error));
+
+    http.get<Hi[]>(baseUrl + 'home').subscribe(result => {
+    }, error => console.error(error));
   }
+}
+
+
+interface Hi {
+  Name: string;
 }
 
 interface WeatherForecast {

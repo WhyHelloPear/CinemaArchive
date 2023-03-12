@@ -6,7 +6,7 @@ namespace Domain.Contracts
     public interface IFilmRepository
     {
         //Film Methods
-        Task<IEnumerable<Film>> GetFilms();
+        Task<List<Film>> GetFilms();
         Task<Result<int>> AddFilm(Film newFilm);
         Task<Result<int>> DeleteFilm(int targetFilmId);
         Task<Result<int>> UpdateFilm(Film updatedFilm);
