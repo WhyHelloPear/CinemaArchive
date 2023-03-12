@@ -6,15 +6,15 @@ namespace Domain.Contracts
     public interface IPersonRepository
     {
         //Person Methods
-        IQueryable<Person> GetPeople();
-        Result<int> DeletePerson(int personId);
-        Result<int> InsertPerson(Person person);
-        Result<int> UpdatePerson(Person person);
+        Task<IQueryable<Person>> GetPeople();
+        Task<Result<int>> DeletePerson(int personId);
+        Task<Result<int>> InsertPerson(Person person);
+        Task<Result<int>> UpdatePerson(Person person);
 
         //Position Methods
-        IQueryable<Position> GetPositions();
-        Result<int> DeletePosition(int positionId);
-        Result<int> InsertPosition(Position position);
-        Result<int> UpdatePosition(Position position);
+        Task<IQueryable<Position>> GetPositions();
+        Task<Result<int>> DeletePosition(int positionId);
+        Task<Result<int>> InsertPosition(Position position);
+        Task<Result<int>> UpdatePosition(Position position);
     }
 }
