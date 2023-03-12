@@ -1,12 +1,15 @@
 ﻿using Core.Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Infrastructure.DataAccess.Entities
 {
+    [Table("Film")]
     public class FilmEntity
     {
-        public int FilmId { get; set; }
+        [Key]public int FilmId { get; set; }
         public string FilmTitle { get; set; }
         public DateTime ReleaseDate { get; set; }
-        public IEnumerable<FilmGenreLink> FilmGenreLinks { get; set; } = Enumerable.Empty<FilmGenreLink>();
     }
 }

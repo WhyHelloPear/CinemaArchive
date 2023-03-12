@@ -1,9 +1,12 @@
-﻿namespace Infrastructure.DataAccess.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Infrastructure.DataAccess.Entities
 {
+    [Table("Genre")]
     public class GenreEntity
     {
-        public int GenreId { get; set; }
+        [Key]public int GenreId { get; set; }
         public string GenreName { get; set; }
-        public IEnumerable<FilmGenreLinkEntity> FilmGenreLinks { get; set; } = Enumerable.Empty<FilmGenreLinkEntity>();
     }
 }
