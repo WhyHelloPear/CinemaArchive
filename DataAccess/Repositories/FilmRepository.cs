@@ -20,32 +20,32 @@ namespace Infrastructure.DataAccess.Repositories
             _mapper = mapper;
         }
 
-        public Task<Result<int>> AddFilm(Film newFilm)
+        public Task<int> AddFilm(Film newFilm)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> AddGenre(Genre newGenre)
+        public Task<int> AddGenre(Genre newGenre)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> AddGenreToFilm(int genreId, int filmId)
+        public Task<int> AddGenreToFilm(int genreId, int filmId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> AddPersonToFilm(int personId, int positionId, int filmId)
+        public Task<int> AddPersonToFilm(int personId, int positionId, int filmId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> DeleteFilm(int targetFilmId)
+        public Task<int> DeleteFilm(int targetFilmId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> DeleteGenre(int targetGenreId)
+        public Task<int> DeleteGenre(int targetGenreId)
         {
             throw new NotImplementedException();
         }
@@ -53,36 +53,46 @@ namespace Infrastructure.DataAccess.Repositories
         public Task<List<Film>> GetFilms()
         {
             return _dbContext.FilmEntities.ProjectTo<Film>(_mapper.ConfigurationProvider).ToListAsync();
-    }
+        }
 
         public Task<IEnumerable<Genre>> GetGenres()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> RemoveGenreFromFilm(int genreId, int filmId)
+        public Task<int> RemoveGenreFromFilm(int genreId, int filmId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> RemovePersonFromFilm(int personId, int filmId)
+        public Task<int> RemovePersonFromFilm(int personId, int filmId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> RemovePersonFromFilm(int personId, int positionId, int filmId)
+        public Task<int> RemovePersonFromFilm(int personId, int positionId, int filmId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> UpdateFilm(Film updatedFilm)
+        public Task<int> UpdateFilm(Film updatedFilm)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> UpdateGenre(Genre updatedGenre)
+        public Task<int> UpdateGenre(Genre updatedGenre)
         {
             throw new NotImplementedException();
+        }
+
+        public Task<int> GetNumFilms()
+        {
+            return _dbContext.FilmEntities.CountAsync();
+        }
+
+        public Task<int> GetNumGenres()
+        {
+            return _dbContext.GenreEntities.CountAsync();
         }
     }
 }

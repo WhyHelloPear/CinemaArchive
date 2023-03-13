@@ -6,6 +6,7 @@ namespace Domain.Contracts
     public interface IPersonRepository
     {
         //Person Methods
+        Task<int> GetNumPeople();
         Task<IEnumerable<Person>> GetPeople();
         Task<Result<int>> DeletePerson(int personId);
         Task<Result<int>> InsertPerson(Person person);

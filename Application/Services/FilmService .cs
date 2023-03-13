@@ -15,10 +15,20 @@ namespace Core.Application.Services
             _filmRepository = filmRepository;
         }
 
+        public async Task<int> GetFilmCount()
+        {
+            return await _filmRepository.GetNumFilms();
+        }
+
         public async Task<List<FilmDto>> GetFilms()
         {
             var films = await _filmRepository.GetFilms();
             return _mapper.Map<List<FilmDto>>(films);
+        }
+
+        public async Task<int> GetGenreCount()
+        {
+            return await _filmRepository.GetNumGenres();
         }
     }
 }

@@ -6,30 +6,37 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  public userData: UserData[] = [];
+  public archiveMetadata: ArchiveMetadata = {
+    numFilms: -1,
+    numPeople: -1,
+    numGenres: -1
+  };
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    http.get<number>(baseUrl + 'film/GetFilmCount').subscribe(
+      result => {
+        this.archiveMetadata.numFilms = result;
+      },
+      error => {
+        console.error(error);
+        this.archiveMetadata.numFilms = 0;
+      }
+    );
 
-    let lat: number;
-    let lng: number;
-
-    navigator.geolocation.getCurrentPosition((position) => {
-      lat = position.coords.latitude;
-      lng = position.coords.longitude;
-
-      let params = new HttpParams()
-        .set('lat', lat)
-        .set('longitude', lng);
-
-      http.get<UserData[]>(baseUrl + 'home/DoThis', { params: params }).subscribe(result => {
-        this.userData = result;
-      }, error => console.error(error));
-
-    });
-
+    http.get<number>(baseUrl + 'film/GetGenreCount').subscribe(
+      result => {
+        this.archiveMetadata.numGenres = result;
+      },
+      error => {
+        console.error(error);
+        this.archiveMetadata.numGenres = 0;
+      }
+    );
   }
 }
 
-interface UserData {
-  address: string;
+interface ArchiveMetadata {
+  numFilms: number;
+  numPeople: number;
+  numGenres: number;
 }
