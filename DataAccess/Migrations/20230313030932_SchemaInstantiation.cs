@@ -17,7 +17,7 @@ namespace Infrastructure.DataAccess.Migrations
                 {
                     FilmId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FilmTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FilmTitle = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -31,7 +31,7 @@ namespace Infrastructure.DataAccess.Migrations
                 {
                     RoleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FilmRoleTitle = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FilmRoleTitle = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,7 +44,7 @@ namespace Infrastructure.DataAccess.Migrations
                 {
                     GenreId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GenreName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    GenreName = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,6 +120,12 @@ namespace Infrastructure.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "UQ_Film_TitleReleaseDate",
+                table: "Film",
+                columns: new[] { "FilmTitle", "ReleaseDate" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FilmGenreLink_GenreId",
                 table: "FilmGenreLink",
                 column: "GenreId");
@@ -133,6 +139,18 @@ namespace Infrastructure.DataAccess.Migrations
                 name: "IX_FilmPersonLink_RoleId",
                 table: "FilmPersonLink",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "UQ_FilmRole_FilmRoleTitle",
+                table: "FilmRole",
+                column: "FilmRoleTitle",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ_Genre_GenreName",
+                table: "Genre",
+                column: "GenreName",
+                unique: true);
         }
 
         /// <inheritdoc />

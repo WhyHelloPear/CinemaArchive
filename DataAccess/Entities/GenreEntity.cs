@@ -7,6 +7,7 @@ namespace Infrastructure.DataAccess.Entities
     public class GenreEntity
     {
         [Key][Required] public int GenreId { get; set; }
+
         [Required] public string GenreName { get; set; }
     }
 }

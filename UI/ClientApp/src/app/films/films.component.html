@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <table class="col-12">
+    <thead>
+      <tr>
+        <td>Title</td>
+        <td>Release Date</td>
+        <td>Genre(s)</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="films.length == 0">
+        <td colspan="3">Nothing you dumb bitch</td>
+      </tr>
+      <ng-container *ngIf="films.length > 0">
+        <tr *ngFor="let film of films">
+          <td>{{ film.filmTitle }}</td>
+          <td>{{ film.releaseDate }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

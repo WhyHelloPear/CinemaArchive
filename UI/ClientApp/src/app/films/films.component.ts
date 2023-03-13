@@ -1,11 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
-  selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
+  selector: 'app-home',
+  templateUrl: './films.component.html',
 })
-export class FetchDataComponent {
+export class FilmsComponent {
   public films: Film[] = [];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {

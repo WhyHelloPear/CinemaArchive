@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.DataAccess.Migrations
 {
     [DbContext(typeof(CinemaArchiveDbContext))]
-    [Migration("20230313024355_SchemaInstantiation")]
+    [Migration("20230313030932_SchemaInstantiation")]
     partial class SchemaInstantiation
     {
         /// <inheritdoc />
@@ -35,12 +35,16 @@ namespace Infrastructure.DataAccess.Migrations
 
                     b.Property<string>("FilmTitle")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("FilmId");
+
+                    b.HasIndex("FilmTitle", "ReleaseDate")
+                        .IsUnique()
+                        .HasDatabaseName("UQ_Film_TitleReleaseDate");
 
                     b.ToTable("Film");
                 });
@@ -90,9 +94,13 @@ namespace Infrastructure.DataAccess.Migrations
 
                     b.Property<string>("FilmRoleTitle")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("RoleId");
+
+                    b.HasIndex("FilmRoleTitle")
+                        .IsUnique()
+                        .HasDatabaseName("UQ_FilmRole_FilmRoleTitle");
 
                     b.ToTable("FilmRole");
                 });
@@ -107,9 +115,13 @@ namespace Infrastructure.DataAccess.Migrations
 
                     b.Property<string>("GenreName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("GenreId");
+
+                    b.HasIndex("GenreName")
+                        .IsUnique()
+                        .HasDatabaseName("UQ_Genre_GenreName");
 
                     b.ToTable("Genre");
                 });

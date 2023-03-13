@@ -23,6 +23,21 @@ namespace Infrastructure.DataAccess.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<FilmEntity>()
+                .HasIndex(film => new {film.FilmTitle, film.ReleaseDate})
+                .IsUnique()
+                .HasDatabaseName("UQ_Film_TitleReleaseDate");
+
+            modelBuilder.Entity<GenreEntity>()
+                .HasIndex(genre=>genre.GenreName)
+                .IsUnique()
+                .HasDatabaseName("UQ_Genre_GenreName");
+
+            modelBuilder.Entity<FilmRoleEntity>()
+                .HasIndex(genre => genre.FilmRoleTitle)
+                .IsUnique()
+                .HasDatabaseName("UQ_FilmRole_FilmRoleTitle");
+
             modelBuilder.Entity<FilmGenreLinkEntity>()
                 .HasKey(e => new { e.FilmId, e.GenreId });
             
