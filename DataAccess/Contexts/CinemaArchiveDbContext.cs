@@ -8,7 +8,10 @@ namespace Infrastructure.DataAccess.Contexts
     {
         public DbSet<FilmEntity> FilmEntities { get; set; }
         public DbSet<GenreEntity> GenreEntities { get; set; }
-        //public DbSet<FilmGenreLinkEntity> FilmGenreLinkEntities { get; set; }
+        public DbSet<FilmRoleEntity> FilmRoleEntities { get; set; }
+        public DbSet<PersonEntity> PersonEntities { get; set; }
+        public DbSet<FilmGenreLinkEntity> FilmGenreLinkEntities { get; set; }
+        public DbSet<FilmPersonLinkEntity> FilmPersonLinkEntities { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,6 +25,9 @@ namespace Infrastructure.DataAccess.Contexts
         {
             modelBuilder.Entity<FilmGenreLinkEntity>()
                 .HasKey(e => new { e.FilmId, e.GenreId });
+            
+            modelBuilder.Entity<FilmPersonLinkEntity>()
+                .HasKey(e => new { e.FilmId, e.PersonId, e.RoleId });
         }
     }
 }

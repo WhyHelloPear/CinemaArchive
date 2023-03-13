@@ -57,6 +57,43 @@ namespace Infrastructure.DataAccess.Migrations
                     b.ToTable("FilmGenreLink");
                 });
 
+            modelBuilder.Entity("Infrastructure.DataAccess.Entities.FilmPersonLinkEntity", b =>
+                {
+                    b.Property<int>("FilmId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FilmId", "PersonId", "RoleId");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("FilmPersonLink");
+                });
+
+            modelBuilder.Entity("Infrastructure.DataAccess.Entities.FilmRoleEntity", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
+
+                    b.Property<string>("FilmRoleTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("FilmRole");
+                });
+
             modelBuilder.Entity("Infrastructure.DataAccess.Entities.GenreEntity", b =>
                 {
                     b.Property<int>("GenreId")
@@ -72,6 +109,23 @@ namespace Infrastructure.DataAccess.Migrations
                     b.HasKey("GenreId");
 
                     b.ToTable("Genre");
+                });
+
+            modelBuilder.Entity("Infrastructure.DataAccess.Entities.PersonEntity", b =>
+                {
+                    b.Property<int>("PersonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonId"));
+
+                    b.Property<string>("PersonName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PersonId");
+
+                    b.ToTable("Person");
                 });
 
             modelBuilder.Entity("Infrastructure.DataAccess.Entities.FilmGenreLinkEntity", b =>
@@ -91,6 +145,33 @@ namespace Infrastructure.DataAccess.Migrations
                     b.Navigation("Film");
 
                     b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("Infrastructure.DataAccess.Entities.FilmPersonLinkEntity", b =>
+                {
+                    b.HasOne("Infrastructure.DataAccess.Entities.FilmEntity", "Film")
+                        .WithMany()
+                        .HasForeignKey("FilmId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Infrastructure.DataAccess.Entities.PersonEntity", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Infrastructure.DataAccess.Entities.FilmRoleEntity", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Film");
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }

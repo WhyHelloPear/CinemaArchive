@@ -39,7 +39,7 @@ namespace Infrastructure.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IQueryable<Position>> GetPositions()
+        public Task<IQueryable<FilmRole>> GetPositions()
         {
             throw new NotImplementedException();
         }
@@ -49,7 +49,7 @@ namespace Infrastructure.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> InsertPosition(Position position)
+        public Task<Result<int>> InsertPosition(FilmRole position)
         {
             throw new NotImplementedException();
         }
@@ -59,7 +59,7 @@ namespace Infrastructure.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Result<int>> UpdatePosition(Position position)
+        public Task<Result<int>> UpdatePosition(FilmRole position)
         {
             throw new NotImplementedException();
         }

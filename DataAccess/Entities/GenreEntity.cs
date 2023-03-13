@@ -6,7 +6,7 @@ namespace Infrastructure.DataAccess.Entities
     [Table("Genre")]
     public class GenreEntity
     {
-        [Key]public int GenreId { get; set; }
-        public string GenreName { get; set; }
+        [Key][Required] public int GenreId { get; set; }
+        [Required] public string GenreName { get; set; }
     }
 }

@@ -13,9 +13,9 @@ namespace Domain.Contracts
         Task<Result<int>> UpdatePerson(Person person);
 
         //Position Methods
-        Task<IQueryable<Position>> GetPositions();
+        Task<IQueryable<FilmRole>> GetPositions();
         Task<Result<int>> DeletePosition(int positionId);
-        Task<Result<int>> InsertPosition(Position position);
-        Task<Result<int>> UpdatePosition(Position position);
+        Task<Result<int>> InsertPosition(FilmRole position);
+        Task<Result<int>> UpdatePosition(FilmRole position);
     }
 }
