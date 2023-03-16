@@ -1,6 +1,28 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
+
+
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxFileDropModule } from 'ngx-file-drop';
+
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    NgxFileDropModule
+  ],
+  providers: [],
+})
+export class AppModule { }
+
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './films.component.html',
