@@ -10,17 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxFileDropModule } from 'ngx-file-drop';
 
 
-@NgModule({
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    NgxFileDropModule
-  ],
-  providers: [],
-})
-export class AppModule { }
-
 
 
 @Component({
