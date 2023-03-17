@@ -21,14 +21,14 @@
   </table>
 </div>
 
-<div class="center">
-  <!--<ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
+<div id="filmUploadFileDropDiv" class="center" hidden>
+  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
                  (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
     <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
       Optional custom content that replaces the the entire default content.
       <button type="button" (click)="openFileSelector()">Browse Files</button>
     </ng-template>
-  </ngx-file-drop>-->
+  </ngx-file-drop>
   <div class="upload-table">
     <table class="table">
       <thead>
@@ -44,3 +44,28 @@
     </table>
   </div>
 </div>
+
+
+<button type="button" class="btn btn-primary" (click)="openModal(template)">Open modal</button>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="filmForm" (ngSubmit)="onSubmit()">
+      <label>
+        Title:
+        <input type="text" formControlName="filmTitle" required />
+      </label>
+      <label>
+        Release Date:
+        <input type="text" formControlName="releaseDate" required />
+      </label>
+      <br />
+      <button type="submit" [disabled]="filmForm.invalid">
+        Save
+      </button>
+    </form>
+  </div>
+</ng-template>
