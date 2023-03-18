@@ -1,6 +1,11 @@
 <div class="container-fluid">
-  <table class="col-12">
+  <table class="col-12 table">
     <thead>
+      <tr>
+        <td colspan="3">
+          <button type="button" class="btn btn-primary" style="float:right" (click)="openModal(template)">Add Film</button>
+        </td>
+      </tr>
       <tr>
         <td>Title</td>
         <td>Release Date</td>
@@ -46,22 +51,24 @@
 </div>
 
 
-<button type="button" class="btn btn-primary" (click)="openModal(template)">Open modal</button>
 
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
   </div>
   <div class="modal-body">
-    <form [formGroup]="filmForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="filmForm" (ngSubmit)="onSubmit()" >
       <label>
         Title:
         <input type="text" formControlName="filmTitle" required />
       </label>
-      <label>
-        Release Date:
-        <input type="date" formControlName="releaseDate" required />
-      </label>
+      <div class="row form-group">
+        <label>
+          Release Date:
+          <input type="date" formControlName="releaseDate" required class="form-control"  />
+        </label>
+      </div>
+
       <br />
       <button type="submit" [disabled]="filmForm.invalid">
         Save

@@ -33,6 +33,11 @@ export class FilmsComponent {
     this.modalRef = this.modalService.show(template);
   }
 
+  closeModal() {
+    this.filmForm.reset();
+    this.modalService.hide();
+  }
+
   getData() {
     var url = window.location.origin + "/film/GetFilms";
     this.http.get<Film[]>(url).subscribe(data => {
@@ -40,8 +45,6 @@ export class FilmsComponent {
       this.films = data;
     });
   }
-
-  
 
   onSubmit() {
     if (this.filmForm.valid) {
@@ -53,12 +56,15 @@ export class FilmsComponent {
 
       var url = window.location.origin + "/film/SaveFilm";
       this.http.post(url, newObject).subscribe(response => {
-        this.films.push(newObject);
-
+        //var test = response.status;
+        this.getData();
+        this.closeModal();
       });
 
     }
   }
+
+  
 
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;

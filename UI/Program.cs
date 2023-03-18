@@ -1,11 +1,9 @@
-using AutoMapper;
 using Core.Application.Services;
 using Domain.Contracts;
 using Infrastructure.DataAccess.Contexts;
 using Infrastructure.DataAccess.Repositories;
-using Microsoft.Extensions.FileProviders;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder( args );
 
 // Add services to the container.
 
@@ -14,15 +12,14 @@ builder.Services.AddScoped<CinemaArchiveDbContext>();
 builder.Services.AddScoped<IFilmRepository, FilmRepository>();
 builder.Services.AddScoped<IFilmService, FilmService>();
 
-builder.Services.AddAutoMapper(typeof(MappingConfiguration).Assembly);
-builder.Services.AddAutoMapper(typeof(DataAccessMappingConfig).Assembly);
-builder.Services.AddAutoMapper(typeof(UIMapper).Assembly);
+builder.Services.AddAutoMapper( typeof( MappingConfiguration ).Assembly );
+builder.Services.AddAutoMapper( typeof( DataAccessMappingConfig ).Assembly );
+builder.Services.AddAutoMapper( typeof( UIMapper ).Assembly );
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
+if( !app.Environment.IsDevelopment() ) {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -36,8 +33,9 @@ app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+    pattern: "{controller}/{action=Index}/{id?}" );
 
-app.MapFallbackToFile("index.html"); ;
+app.MapFallbackToFile( "index.html" );
+;
 
 app.Run();
