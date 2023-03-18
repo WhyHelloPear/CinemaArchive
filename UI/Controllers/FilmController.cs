@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using Core.Application.DTOs;
 using Core.Application.Services;
+using Core.Domain.Models;
+using FluentResults;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UI.ViewModels;
@@ -41,5 +44,16 @@ namespace UI.Controllers
         {
             return Ok(await _filmService.GetGenreCount());
         }
+
+        [HttpPost]
+        [Route("SaveFilm")]
+        public async Task<IActionResult> SaveFilmAsync([FromBody] FilmViewModel film)
+        {
+            FilmDto hey = _mapper.Map<FilmDto>(film);
+            Result test = await _filmService.SaveFilm(hey);
+
+            return test.IsSuccess ? Ok() : BadRequest( test.Errors.First().Message);
+        }
+
     }
 }

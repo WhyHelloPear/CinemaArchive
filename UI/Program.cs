@@ -3,6 +3,7 @@ using Core.Application.Services;
 using Domain.Contracts;
 using Infrastructure.DataAccess.Contexts;
 using Infrastructure.DataAccess.Repositories;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 

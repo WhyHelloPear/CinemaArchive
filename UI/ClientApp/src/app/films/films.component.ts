@@ -10,7 +10,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 
 export class FilmsComponent {
-  @Output() saveFilm = new EventEmitter<{ filmTitle: string; releaseDate: string }>();
+  //@Output() saveFilm = new EventEmitter<{ filmTitle: string; releaseDate: string }>();
 
   public films: Film[] = [];
   public files: NgxFileDropEntry[] = [];
@@ -39,17 +39,24 @@ export class FilmsComponent {
       // Set the data to a component property
       this.films = data;
     });
-    debugger;
   }
+
+  
 
   onSubmit() {
     if (this.filmForm.valid) {
-      const film = {
+      var newObject: Film = {
+        filmId: -1,
         filmTitle: this.filmForm.value.filmTitle,
-        releaseDate: this.filmForm.value.releaseDate,
+        releaseDate: this.filmForm.value.releaseDate as Date,
       };
 
-      this.saveFilm.emit(film);
+      var url = window.location.origin + "/film/SaveFilm";
+      this.http.post(url, newObject).subscribe(response => {
+        this.films.push(newObject);
+
+      });
+
     }
   }
 

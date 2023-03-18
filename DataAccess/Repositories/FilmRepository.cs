@@ -20,69 +20,9 @@ namespace Infrastructure.DataAccess.Repositories
             _mapper = mapper;
         }
 
-        public Task<int> AddFilm(Film newFilm)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> AddGenre(Genre newGenre)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> AddGenreToFilm(int genreId, int filmId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> AddPersonToFilm(int personId, int positionId, int filmId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> DeleteFilm(int targetFilmId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> DeleteGenre(int targetGenreId)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<List<Film>> GetFilms()
         {
             return _dbContext.FilmEntities.ProjectTo<Film>(_mapper.ConfigurationProvider).ToListAsync();
-        }
-
-        public Task<IEnumerable<Genre>> GetGenres()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> RemoveGenreFromFilm(int genreId, int filmId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> RemovePersonFromFilm(int personId, int filmId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> RemovePersonFromFilm(int personId, int positionId, int filmId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> UpdateFilm(Film updatedFilm)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> UpdateGenre(Genre updatedGenre)
-        {
-            throw new NotImplementedException();
         }
 
         public Task<int> GetNumFilms()
@@ -93,6 +33,28 @@ namespace Infrastructure.DataAccess.Repositories
         public Task<int> GetNumGenres()
         {
             return _dbContext.GenreEntities.CountAsync();
+        }
+
+        public async Task<int> SaveFilm(Film filmEntity)
+        {
+            FilmEntity? existingFilm = _dbContext.FilmEntities.FirstOrDefault(f => 
+                f.FilmId == filmEntity.FilmId ||
+                (f.FilmTitle == filmEntity.FilmTitle && f.ReleaseDate == filmEntity.ReleaseDate)
+            );
+
+            if (existingFilm == null)
+            {
+                existingFilm = _mapper.Map<FilmEntity>( filmEntity);
+                _dbContext.FilmEntities.Add(existingFilm);
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                existingFilm.FilmTitle = filmEntity.FilmTitle;
+                existingFilm.ReleaseDate = filmEntity.ReleaseDate;
+            }
+
+            return await _dbContext.SaveChangesAsync();
         }
     }
 }
