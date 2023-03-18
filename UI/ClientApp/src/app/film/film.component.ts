@@ -1,4 +1,4 @@
-import { Component, TemplateRef, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,10 +6,10 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './films.component.html',
+  templateUrl: './film.component.html',
 })
 
-export class FilmsComponent {
+export class FilmComponent {
   //@Output() saveFilm = new EventEmitter<{ filmTitle: string; releaseDate: string }>();
 
   public films: Film[] = [];

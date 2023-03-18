@@ -7,10 +7,11 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { FilmsComponent } from './films/films.component';
+import { FilmComponent } from './film/film.component';
+import { GenreComponent } from './genre/genre.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,7 +24,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    FilmsComponent
+    FilmComponent,
+    GenreComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -36,7 +38,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'films', component: FilmsComponent },
+      { path: 'film', component: FilmComponent },
+      { path: 'genre', component: GenreComponent },
     ])
   ],
   providers: [
