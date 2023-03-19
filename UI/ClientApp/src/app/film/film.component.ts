@@ -10,8 +10,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 
 export class FilmComponent {
-  //@Output() saveFilm = new EventEmitter<{ filmTitle: string; releaseDate: string }>();
-
   public films: Film[] = [];
   public files: NgxFileDropEntry[] = [];
   public modalRef?: BsModalRef;
@@ -54,7 +52,7 @@ export class FilmComponent {
         releaseDate: this.filmForm.value.releaseDate as Date,
       };
 
-      var url = window.location.origin + "/film/SaveFilm";
+      var url = window.location.origin + "/film/CreateFilm";
       this.http.post(url, newObject).subscribe(response => {
         //var test = response.status;
         this.getData();

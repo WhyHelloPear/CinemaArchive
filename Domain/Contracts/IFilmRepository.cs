@@ -9,10 +9,9 @@ namespace Domain.Contracts
         Task<List<Film>> GetFilms();
         Task<List<Genre>> GetGenres();
         Task<int> GetNumGenres();
-        Task<int> SaveFilm( Film filmToSave );
-        Task<int> SaveGenre( Genre genreToSave );
-
-        Task<int> CreateFilm( Film filmToCreate );
-        Task<int> CreateGenre( Genre genreToCreate );
+        Task<Result> CreateFilm( Film filmToCreate );
+        Task<Result> CreateGenre( Genre genreToCreate );
+        Task<Result> UpdateGenre( Genre genreToUpdate );
+        Task<Result> DeleteGenre( int genreId );
     }
 }

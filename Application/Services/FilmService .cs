@@ -11,17 +11,10 @@ namespace Core.Application.Services
         private readonly IMapper _mapper;
         private readonly IFilmRepository _filmRepository;
 
-
         public FilmService( IFilmRepository filmRepository, IMapper mapper )
         {
             _mapper = mapper;
             _filmRepository = filmRepository;
-        }
-
-        public Task<Result> CreateFilm( FilmDto film )
-        {
-            Film filmToCreate = _mapper.Map<Film>( film );
-            return await _filmRepository.CreateFilm( filmToCreate );
         }
 
         public async Task<int> GetFilmCount()
@@ -46,20 +39,28 @@ namespace Core.Application.Services
             return _mapper.Map<List<GenreDto>>( films );
         }
 
-        public async Task<Result> SaveFilm( FilmDto film )
+        public async Task<Result> CreateGenre( GenreDto genreToCreate )
         {
-            Film filmToSave = _mapper.Map<Film>( film );
-            var result = await _filmRepository.SaveFilm( filmToSave );
-
-            return result == 0 ? Result.Fail( "Unable to save film." ) : Result.Ok();
+            Genre genre = _mapper.Map<Genre>( genreToCreate );
+            return await _filmRepository.CreateGenre( genre );
         }
 
-        public async Task<Result> SaveGenre( GenreDto genre )
+        public async Task<Result> CreateFilm( FilmDto filmToCreate )
         {
-            Genre genreToSave = _mapper.Map<Genre>( genre );
-            var result = await _filmRepository.SaveGenre( genreToSave );
+            Film film = _mapper.Map<Film>( filmToCreate );
 
-            return result == 0 ? Result.Fail( "Unable to save film." ) : Result.Ok();
+            return await _filmRepository.CreateFilm( film );
+        }
+
+        public async Task<Result> UpdateGenre( GenreDto genreToUpdate )
+        {
+            Genre genre = _mapper.Map<Genre>( genreToUpdate );
+            return await _filmRepository.UpdateGenre( genre );
+        }
+
+        public async Task<Result> DeleteGenre( int genreId )
+        {
+            return await _filmRepository.DeleteGenre( genreId );
         }
     }
 }

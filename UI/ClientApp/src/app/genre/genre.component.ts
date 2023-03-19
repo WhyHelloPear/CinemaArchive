@@ -10,6 +10,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 export class GenreComponent {
   genreForm: FormGroup;
+  private selectedGenre?: Genre;
   public genres: Genre[] = [];
   public modalRef?: BsModalRef;
 
@@ -41,14 +42,14 @@ export class GenreComponent {
     });
   }
 
-  onSubmit() {
+  onCreateGenre() {
     if (this.genreForm.valid) {
       var newObject: Genre = {
         genreId: -1,
         genreName: this.genreForm.value.genreName,
       };
       debugger
-      var url = window.location.origin + "/film/SaveGenre";
+      var url = window.location.origin + "/film/CreateGenre";
       this.http.post(url, newObject).subscribe(response => {
         //var test = response.status;
         this.getData();
@@ -56,6 +57,44 @@ export class GenreComponent {
       });
 
     }
+  }
+
+  onUpdateGenre() {
+    if (this.genreForm.valid) {
+
+      const updatedGenre = {
+        ...this.selectedGenre, // copy the selected row data
+        ...this.genreForm.value // overwrite the values with the new form data
+      };
+
+      var url = window.location.origin + "/film/UpdateGenre";
+      this.http.post(url, updatedGenre).subscribe(response => {
+        //var test = response.status;
+        this.getData();
+        this.closeModal();
+      });
+
+    }
+  }
+
+  onDeleteGenre(genreId : number) {
+    const confirmDelete = window.confirm('Are you sure you want to delete this genre?');
+    if (confirmDelete) {
+      var url = window.location.origin + "/film/DeleteGenre";
+      this.http.post(url, genreId).subscribe(response => {
+        //var test = response.status;
+        this.getData();
+        this.closeModal();
+      });
+    }
+  }
+
+  openEditModal(template: TemplateRef<any>,genre: Genre) {
+    this.selectedGenre = genre; // save the selected row data to a variable
+    this.genreForm.setValue({
+      genreName: genre.genreName,
+    });
+    this.modalRef = this.modalService.show(template);
   }
 }
 

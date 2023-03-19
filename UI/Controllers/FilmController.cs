@@ -51,24 +51,42 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        [Route( "SaveFilm" )]
+        [Route( "CreateFilm" )]
         public async Task<IActionResult> SaveFilmAsync( [FromBody] FilmViewModel film )
         {
             FilmDto hey = _mapper.Map<FilmDto>( film );
-            Result test = await _filmService.SaveFilm( hey );
+            Result test = await _filmService.CreateFilm( hey );
 
             return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
         }
 
         [HttpPost]
-        [Route( "SaveGenre" )]
-        public async Task<IActionResult> SaveGenreAsync( [FromBody] GenreViewModel film )
+        [Route( "CreateGenre" )]
+        public async Task<IActionResult> SaveGenreAsync( [FromBody] GenreViewModel genreToSave )
         {
-            GenreDto hey = _mapper.Map<GenreDto>( film );
-            Result test = await _filmService.SaveGenre( hey );
+            GenreDto hey = _mapper.Map<GenreDto>( genreToSave );
+            Result test = await _filmService.CreateGenre( hey );
 
             return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
         }
 
+        [HttpPost]
+        [Route( "UpdateGenre" )]
+        public async Task<IActionResult> UpdateGenreAsync( [FromBody] GenreViewModel genreToUpdate )
+        {
+            GenreDto hey = _mapper.Map<GenreDto>( genreToUpdate );
+            Result test = await _filmService.UpdateGenre( hey );
+
+            return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
+        }
+
+        [HttpPost]
+        [Route( "DeleteGenre" )]
+        public async Task<IActionResult> DeleteGenreAsync( [FromBody] int genreId )
+        {
+            Result test = await _filmService.DeleteGenre( genreId );
+
+            return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
+        }
     }
 }

@@ -2,7 +2,7 @@
   <table class="col-12 table">
     <thead>
       <tr>
-        <td colspan="3">
+        <td colspan="2">
           <button type="button" class="btn btn-primary" style="float:right" (click)="openModal(template)">Add Genre</button>
         </td>
       </tr>
@@ -17,6 +17,12 @@
       <ng-container *ngIf="genres.length > 0">
         <tr *ngFor="let genre of genres">
           <td>{{ genre.genreName }}</td>
+          <td>
+            <button type="button" class="btn btn-link" (click)="openEditModal(editTemplate, genre)">
+              Edit
+            </button>
+            <button type="button" class="btn btn-danger" (click)="onDeleteGenre(genre.genreId)">Delete</button>
+          </td>
         </tr>
       </ng-container>
     </tbody>
@@ -24,12 +30,32 @@
 </div>
 
 
+
+
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
   </div>
   <div class="modal-body">
-    <form [formGroup]="genreForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="genreForm" (ngSubmit)="onCreateGenre()">
+      <label>
+        Name:
+        <input type="text" formControlName="genreName" required />
+      </label>
+      <br />
+      <button type="submit" [disabled]="genreForm.invalid">
+        Save
+      </button>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #editTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Edit Genre</h4>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="genreForm" (ngSubmit)="onUpdateGenre()">
       <label>
         Name:
         <input type="text" formControlName="genreName" required />
