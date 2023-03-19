@@ -2,11 +2,14 @@
 
 #nullable disable
 
-namespace Infrastructure.DataAccess.Migrations {
+namespace Infrastructure.DataAccess.Migrations
+{
     /// <inheritdoc />
-    public partial class SchemaInstantiation : Migration {
+    public partial class SchemaInstantiation : Migration
+    {
         /// <inheritdoc />
-        protected override void Up( MigrationBuilder migrationBuilder ) {
+        protected override void Up( MigrationBuilder migrationBuilder )
+        {
             migrationBuilder.CreateTable(
                 name: "Film",
                 columns: table => new {
@@ -138,7 +141,8 @@ namespace Infrastructure.DataAccess.Migrations {
         }
 
         /// <inheritdoc />
-        protected override void Down( MigrationBuilder migrationBuilder ) {
+        protected override void Down( MigrationBuilder migrationBuilder )
+        {
             migrationBuilder.DropTable(
                 name: "FilmGenreLink" );
 

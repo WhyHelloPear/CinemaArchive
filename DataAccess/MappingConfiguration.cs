@@ -2,8 +2,10 @@
 using Core.Domain.Models;
 using Infrastructure.DataAccess.Entities;
 
-public class DataAccessMappingConfig : Profile {
-    public DataAccessMappingConfig() {
+public class DataAccessMappingConfig : Profile
+{
+    public DataAccessMappingConfig()
+    {
         CreateMap<FilmEntity, Film>();
         CreateMap<Film, FilmEntity>()
             .ForMember( vm => vm.FilmId, m => m.Ignore() );

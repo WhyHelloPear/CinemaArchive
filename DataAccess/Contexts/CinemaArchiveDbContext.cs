@@ -1,8 +1,10 @@
 ﻿using Infrastructure.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.DataAccess.Contexts {
-    public sealed class CinemaArchiveDbContext : DbContext {
+namespace Infrastructure.DataAccess.Contexts
+{
+    public sealed class CinemaArchiveDbContext : DbContext
+    {
         public DbSet<FilmEntity> FilmEntities { get; set; }
         public DbSet<GenreEntity> GenreEntities { get; set; }
         public DbSet<FilmRoleEntity> FilmRoleEntities { get; set; }
@@ -10,14 +12,16 @@ namespace Infrastructure.DataAccess.Contexts {
         public DbSet<FilmGenreLinkEntity> FilmGenreLinkEntities { get; set; }
         public DbSet<FilmPersonLinkEntity> FilmPersonLinkEntities { get; set; }
 
-        protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder ) {
+        protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
+        {
             //things to change
             //store connection string in appsetting and have the connection string injected into the context
             //enable encryption for sql server
             optionsBuilder.UseSqlServer( "Server=localhost;Database=CinemaArchive;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=false" );
         }
 
-        protected override void OnModelCreating( ModelBuilder modelBuilder ) {
+        protected override void OnModelCreating( ModelBuilder modelBuilder )
+        {
             modelBuilder.Entity<FilmEntity>()
                 .HasIndex( film => new { film.FilmTitle, film.ReleaseDate } )
                 .IsUnique()

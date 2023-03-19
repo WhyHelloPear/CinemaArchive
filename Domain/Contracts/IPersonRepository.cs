@@ -1,8 +1,10 @@
 ﻿using Core.Domain.Models;
 using FluentResults;
 
-namespace Domain.Contracts {
-    public interface IPersonRepository {
+namespace Domain.Contracts
+{
+    public interface IPersonRepository
+    {
         //Person Methods
         Task<int> GetNumPeople();
         Task<IEnumerable<Person>> GetPeople();
