@@ -36,19 +36,35 @@ namespace Infrastructure.DataAccess.Repositories {
             return _dbContext.GenreEntities.CountAsync();
         }
 
-        public async Task<int> SaveFilm( Film filmEntity ) {
+        public async Task<int> SaveFilm( Film filmToSave ) {
             FilmEntity? existingFilm = _dbContext.FilmEntities.FirstOrDefault( f =>
-                f.FilmId == filmEntity.FilmId ||
-                ( f.FilmTitle == filmEntity.FilmTitle && f.ReleaseDate == filmEntity.ReleaseDate )
+                f.FilmId == filmToSave.FilmId ||
+                ( f.FilmTitle == filmToSave.FilmTitle && f.ReleaseDate == filmToSave.ReleaseDate )
             );
 
             if( existingFilm == null ) {
-                existingFilm = _mapper.Map<FilmEntity>( filmEntity );
+                existingFilm = _mapper.Map<FilmEntity>( filmToSave );
                 _dbContext.FilmEntities.Add( existingFilm );
             }
             else {
-                existingFilm.FilmTitle = filmEntity.FilmTitle;
-                existingFilm.ReleaseDate = filmEntity.ReleaseDate;
+                existingFilm.FilmTitle = filmToSave.FilmTitle;
+                existingFilm.ReleaseDate = filmToSave.ReleaseDate;
+            }
+
+            return await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> SaveGenre( Genre genreToSave ) {
+            GenreEntity? existingGenre = _dbContext.GenreEntities.FirstOrDefault( f =>
+                f.GenreId == genreToSave.GenreId || f.GenreName == genreToSave.GenreName
+            );
+
+            if( existingGenre == null ) {
+                existingGenre = _mapper.Map<GenreEntity>( genreToSave );
+                _dbContext.GenreEntities.Add( existingGenre );
+            }
+            else {
+                existingGenre.GenreName = genreToSave.GenreName;
             }
 
             return await _dbContext.SaveChangesAsync();

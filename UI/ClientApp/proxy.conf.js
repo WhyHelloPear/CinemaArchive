@@ -8,6 +8,7 @@ const PROXY_CONFIG = [
     context: [
       "/home",
       "/film",
+      "/genre",
    ],
     target: target,
     secure: false,

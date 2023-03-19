@@ -52,5 +52,14 @@ namespace UI.Controllers {
             return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
         }
 
+        [HttpPost]
+        [Route( "SaveGenre" )]
+        public async Task<IActionResult> SaveGenreAsync( [FromBody] GenreViewModel film ) {
+            GenreDto hey = _mapper.Map<GenreDto>( film );
+            Result test = await _filmService.SaveGenre( hey );
+
+            return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
+        }
+
     }
 }

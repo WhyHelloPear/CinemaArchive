@@ -1,1 +1,43 @@
-<p>shutup</p>
+<div class="container-fluid">
+  <table class="col-12 table">
+    <thead>
+      <tr>
+        <td colspan="3">
+          <button type="button" class="btn btn-primary" style="float:right" (click)="openModal(template)">Add Genre</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Genre</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="genres.length == 0">
+        <td>Nothing you dumb bitch</td>
+      </tr>
+      <ng-container *ngIf="genres.length > 0">
+        <tr *ngFor="let genre of genres">
+          <td>{{ genre.genreName }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="genreForm" (ngSubmit)="onSubmit()">
+      <label>
+        Name:
+        <input type="text" formControlName="genreName" required />
+      </label>
+      <br />
+      <button type="submit" [disabled]="genreForm.invalid">
+        Save
+      </button>
+    </form>
+  </div>
+</ng-template>

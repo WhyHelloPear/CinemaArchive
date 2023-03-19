@@ -39,5 +39,12 @@ namespace Core.Application.Services {
 
             return result == 0 ? Result.Fail( "Unable to save film." ) : Result.Ok();
         }
+
+        public async Task<Result> SaveGenre( GenreDto genre ) {
+            Genre genreToSave = _mapper.Map<Genre>( genre );
+            var result = await _filmRepository.SaveGenre( genreToSave );
+
+            return result == 0 ? Result.Fail( "Unable to save film." ) : Result.Ok();
+        }
     }
 }

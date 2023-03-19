@@ -6,6 +6,7 @@ namespace Core.Application.Services {
         Task<List<FilmDto>> GetFilms();
         Task<List<GenreDto>> GetGenres();
         Task<Result> SaveFilm( FilmDto film );
+        Task<Result> SaveGenre( GenreDto film );
         Task<int> GetFilmCount();
         Task<int> GetGenreCount();
     }

@@ -45,15 +45,15 @@ export class GenreComponent {
     if (this.genreForm.valid) {
       var newObject: Genre = {
         genreId: -1,
-        genreName: this.genreForm.value.filmTitle,
+        genreName: this.genreForm.value.genreName,
       };
-
-      //var url = window.location.origin + "/film/SaveFilm";
-      //this.http.post(url, newObject).subscribe(response => {
-      //  //var test = response.status;
-      //  this.getData();
-      //  this.closeModal();
-      //});
+      debugger
+      var url = window.location.origin + "/film/SaveGenre";
+      this.http.post(url, newObject).subscribe(response => {
+        //var test = response.status;
+        this.getData();
+        this.closeModal();
+      });
 
     }
   }

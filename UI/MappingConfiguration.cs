@@ -6,5 +6,8 @@ public class UIMapper : Profile {
     public UIMapper() {
         CreateMap<FilmDto, FilmViewModel>();
         CreateMap<FilmViewModel, FilmDto>();
+
+        CreateMap<GenreDto, GenreViewModel>();
+        CreateMap<GenreViewModel, GenreDto>();
     }
 }

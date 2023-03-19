@@ -6,5 +6,8 @@ public class MappingConfiguration : Profile {
     public MappingConfiguration() {
         CreateMap<FilmDto, Film>();
         CreateMap<Film, FilmDto>();
+
+        CreateMap<GenreDto, Genre>();
+        CreateMap<Genre, GenreDto>();
     }
 }
