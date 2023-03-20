@@ -38,10 +38,29 @@ namespace UI.Controllers
 
         [HttpPost]
         [Route( "CreateFilm" )]
-        public async Task<IActionResult> SaveFilmAsync( [FromBody] FilmViewModel film )
+        public async Task<IActionResult> CreateFilmAsync( [FromBody] FilmViewModel film )
         {
             FilmDto hey = _mapper.Map<FilmDto>( film );
             Result test = await _filmService.CreateFilm( hey );
+
+            return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
+        }
+
+        [HttpPost]
+        [Route( "UpdateFilm" )]
+        public async Task<IActionResult> UpdateFilmAsync( [FromBody] FilmViewModel film )
+        {
+            FilmDto hey = _mapper.Map<FilmDto>( film );
+            Result test = await _filmService.UpdateFilm( hey );
+
+            return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
+        }
+
+        [HttpPost]
+        [Route( "DeleteFilm" )]
+        public async Task<IActionResult> DeleteFilmAsync( [FromBody] int filmId )
+        {
+            Result test = await _filmService.DeleteFilm( filmId );
 
             return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
         }

@@ -28,23 +28,6 @@ namespace Core.Application.Services
             return _mapper.Map<List<FilmDto>>( films );
         }
 
-        public async Task<int> GetGenreCount()
-        {
-            return await _filmRepository.GetNumGenres();
-        }
-
-        public async Task<List<GenreDto>> GetGenres()
-        {
-            var films = await _filmRepository.GetGenres();
-            return _mapper.Map<List<GenreDto>>( films );
-        }
-
-        public async Task<Result> CreateGenre( GenreDto genreToCreate )
-        {
-            Genre genre = _mapper.Map<Genre>( genreToCreate );
-            return await _filmRepository.CreateGenre( genre );
-        }
-
         public async Task<Result> CreateFilm( FilmDto filmToCreate )
         {
             Film film = _mapper.Map<Film>( filmToCreate );
@@ -52,15 +35,14 @@ namespace Core.Application.Services
             return await _filmRepository.CreateFilm( film );
         }
 
-        public async Task<Result> UpdateGenre( GenreDto genreToUpdate )
+        public Task<Result> UpdateFilm( FilmDto filmToUpdate )
         {
-            Genre genre = _mapper.Map<Genre>( genreToUpdate );
-            return await _filmRepository.UpdateGenre( genre );
+            throw new NotImplementedException();
         }
 
-        public async Task<Result> DeleteGenre( int genreId )
+        public Task<Result> DeleteFilm( int filmId )
         {
-            return await _filmRepository.DeleteGenre( genreId );
+            throw new NotImplementedException();
         }
     }
 }
