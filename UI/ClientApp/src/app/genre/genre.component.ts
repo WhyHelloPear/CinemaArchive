@@ -36,7 +36,7 @@ export class GenreComponent {
   }
 
   getData() {
-    var url = window.location.origin + "/film/GetGenres";
+    var url = window.location.origin + "/genre/GetGenres";
     this.http.get<Genre[]>(url).subscribe(data => {
       this.genres = data;
     });
@@ -49,7 +49,7 @@ export class GenreComponent {
         genreName: this.genreForm.value.genreName,
       };
       debugger
-      var url = window.location.origin + "/film/CreateGenre";
+      var url = window.location.origin + "/genre/CreateGenre";
       this.http.post(url, newObject).subscribe(response => {
         //var test = response.status;
         this.getData();
@@ -67,7 +67,7 @@ export class GenreComponent {
         ...this.genreForm.value // overwrite the values with the new form data
       };
 
-      var url = window.location.origin + "/film/UpdateGenre";
+      var url = window.location.origin + "/genre/UpdateGenre";
       this.http.post(url, updatedGenre).subscribe(response => {
         //var test = response.status;
         this.getData();
@@ -80,7 +80,7 @@ export class GenreComponent {
   onDeleteGenre(genreId : number) {
     const confirmDelete = window.confirm('Are you sure you want to delete this genre?');
     if (confirmDelete) {
-      var url = window.location.origin + "/film/DeleteGenre";
+      var url = window.location.origin + "/genre/DeleteGenre";
       this.http.post(url, genreId).subscribe(response => {
         //var test = response.status;
         this.getData();

@@ -23,7 +23,7 @@ export class HomeComponent {
       }
     );
 
-    http.get<number>(baseUrl + 'film/GetGenreCount').subscribe(
+    http.get<number>(baseUrl + 'genre/GetGenreCount').subscribe(
       result => {
         this.archiveMetadata.numGenres = result;
       },
