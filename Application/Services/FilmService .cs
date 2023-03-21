@@ -37,12 +37,13 @@ namespace Core.Application.Services
 
         public Task<Result> UpdateFilm( FilmDto filmToUpdate )
         {
-            throw new NotImplementedException();
+            Film film = _mapper.Map<Film>( filmToUpdate );
+            return _filmRepository.UpdateFilm( film );
         }
 
         public Task<Result> DeleteFilm( int filmId )
         {
-            throw new NotImplementedException();
+            return _filmRepository.DeleteFilm( filmId );
         }
     }
 }

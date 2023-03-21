@@ -143,7 +143,7 @@ namespace Infrastructure.DataAccess.Migrations
             modelBuilder.Entity("Infrastructure.DataAccess.Entities.FilmGenreLinkEntity", b =>
                 {
                     b.HasOne("Infrastructure.DataAccess.Entities.FilmEntity", "Film")
-                        .WithMany()
+                        .WithMany("FilmGenreLinks")
                         .HasForeignKey("FilmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -184,6 +184,11 @@ namespace Infrastructure.DataAccess.Migrations
                     b.Navigation("Person");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Infrastructure.DataAccess.Entities.FilmEntity", b =>
+                {
+                    b.Navigation("FilmGenreLinks");
                 });
 #pragma warning restore 612, 618
         }

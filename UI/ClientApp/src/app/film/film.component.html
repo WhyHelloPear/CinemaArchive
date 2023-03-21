@@ -20,6 +20,20 @@
         <tr *ngFor="let film of films">
           <td>{{ film.filmTitle }}</td>
           <td>{{ film.releaseDate }}</td>
+          <td *ngIf="film.genreList.length == 0">n/a</td>
+          <td *ngIf="film.genreList.length > 0">
+            <ng-container *ngFor="let genre of film.genreList; let i = index; let last = last">
+              {{genre.genreName}}
+              <span *ngIf="!last">, </span> <!-- add a comma between each genre name except for the last one -->
+            </ng-container>
+          </td>
+
+          <td>
+            <button type="button" class="btn btn-link" (click)="openFilmUpdateForm(updateTemplate, film)">
+              Edit
+            </button>
+            <button type="button" class="btn btn-danger" (click)="onDeleteFilm(film.filmId)">Delete</button>
+          </td>
         </tr>
       </ng-container>
     </tbody>
@@ -69,6 +83,31 @@
         </label>
       </div>
 
+      <br />
+      <button type="submit" [disabled]="filmForm.invalid">
+        Save
+      </button>
+    </form>
+  </div>
+</ng-template>
+
+
+<ng-template #updateTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Edit Genre</h4>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="filmForm" (ngSubmit)="onUpdateFilm()">
+      <label>
+        Title:
+        <input type="text" formControlName="filmTitle" required />
+      </label>
+      <div class="row form-group">
+        <label>
+          Release Date:
+          <input type="date" formControlName="releaseDate" required class="form-control" placeholder="selectedFilm?.releaseDate" />
+        </label>
+      </div>
       <br />
       <button type="submit" [disabled]="filmForm.invalid">
         Save

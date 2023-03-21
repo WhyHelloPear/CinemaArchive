@@ -6,5 +6,6 @@
         public string FilmTitle { get; set; } = string.Empty;
         public DateTime ReleaseDate { get; set; }
         public decimal GrossRevenue { get; set; }
+        public List<GenreDto> GenreList { get; set; }
     }
 }

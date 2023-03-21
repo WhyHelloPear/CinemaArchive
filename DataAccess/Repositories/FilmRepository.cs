@@ -36,45 +36,25 @@ namespace Infrastructure.DataAccess.Repositories
             return numChanges > 0 ? Result.Ok() : Result.Fail( "Unable to save changes" );
         }
 
-        public async Task<Result> CreateGenre( Genre genreToCreate )
+        public async Task<Result> DeleteFilm( int filmId )
         {
-            if( _dbContext.GenreEntities.Any( genre => string.Equals( genre.GenreName.ToLower().Trim(), genreToCreate.GenreName.ToLower().Trim() ) ) ) {
-                return Result.Fail( "Genre already exists." );
+            FilmEntity? targetFilm = _dbContext.FilmEntities.FirstOrDefault( f => f.FilmId == filmId );
+            if( targetFilm == null ) {
+                return Result.Fail( "Film does not exist" );
             }
 
-            GenreEntity newFilm = _mapper.Map<GenreEntity>( genreToCreate );
-            _dbContext.Add( newFilm );
-
+            _dbContext.FilmEntities.Remove( targetFilm );
             int numChanges = await _dbContext.SaveChangesAsync();
 
-            return numChanges > 0 ? Result.Ok() : Result.Fail( "Unable to save changes" );
-        }
-
-        public async Task<Result> DeleteGenre( int genreId )
-        {
-            GenreEntity? targetGenre = _dbContext.GenreEntities.FirstOrDefault(g => g.GenreId == genreId );
-
-            if( targetGenre == null ) {
-                return Result.Fail( "Unable to find genre to delete." );
-            }
-
-            _dbContext.GenreEntities.Remove( targetGenre );
-            int changesMade = await _dbContext.SaveChangesAsync( );
-
-            return changesMade > 0 ? Result.Ok() : Result.Fail( "Unable to delete genre." );
+            return numChanges > 0 ? Result.Ok() : Result.Fail( "Unable to delete film." );
         }
 
         public async Task<List<Film>> GetFilms()
         {
             return await _dbContext.FilmEntities
+                .Include(i => i.FilmGenreLinks)
+                .ThenInclude(i => i.Genre)
                 .ProjectTo<Film>( _mapper.ConfigurationProvider )
-                .ToListAsync();
-        }
-
-        public async Task<List<Genre>> GetGenres()
-        {
-            return await _dbContext.GenreEntities
-                .ProjectTo<Genre>( _mapper.ConfigurationProvider )
                 .ToListAsync();
         }
 
@@ -83,28 +63,19 @@ namespace Infrastructure.DataAccess.Repositories
             return _dbContext.FilmEntities.CountAsync();
         }
 
-        public Task<int> GetNumGenres()
+        public async Task<Result> UpdateFilm( Film filmToCreate )
         {
-            return _dbContext.GenreEntities.CountAsync();
-        }
-
-        public async Task<Result> UpdateGenre( Genre genreToUpdate )
-        {
-            GenreEntity? existingGenre = _dbContext.GenreEntities.FirstOrDefault( g => g.GenreId == genreToUpdate.GenreId );
-
-            if( existingGenre == null ) {
-                return Result.Fail( "Unable to find existing genre with matching id." );
+            FilmEntity? targetfilm = _dbContext.FilmEntities.FirstOrDefault( f => f.FilmId == filmToCreate.FilmId );
+            if( targetfilm == null ) {
+                return Result.Fail( "Film does not exist" );
             }
 
-            if(_dbContext.GenreEntities.Any( g => g.GenreName == genreToUpdate.GenreName ) ) {
-                return Result.Fail( "Genre with name already exists." );
-            }
+            targetfilm.FilmTitle = filmToCreate.FilmTitle;
+            targetfilm.ReleaseDate = filmToCreate.ReleaseDate;
 
-            existingGenre.GenreName = genreToUpdate.GenreName;
+            int numChanges = await _dbContext.SaveChangesAsync();
 
-            int numUpdates = await _dbContext.SaveChangesAsync();
-
-            return numUpdates > 0 ? Result.Ok() : Result.Fail( "Unable to update genre" );
+            return numChanges > 0 ? Result.Ok() : Result.Fail( "No changes made." );
         }
     }
 }

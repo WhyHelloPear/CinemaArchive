@@ -7,6 +7,6 @@ namespace Core.Domain.Models
         [Key] public int FilmId { get; set; }
         [Required] public string FilmTitle { get; set; }
         [Required] public DateTime ReleaseDate { get; set; }
-        public decimal GrossRevenue { get; set; }
+        public List<Genre> GenreList { get; set; }
     }
 }

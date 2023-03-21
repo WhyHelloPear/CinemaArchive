@@ -10,11 +10,18 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 
 export class FilmComponent {
+  //data entities used
   public films: Film[] = [];
-  public files: NgxFileDropEntry[] = [];
+
+  public selectedGenres: Genre[] = [];
+  public unselectedGenres: Genre[] = [];
+  public originalGenreList: Genre[] = [];
+
   public modalRef?: BsModalRef;
+  public files: NgxFileDropEntry[] = [];
 
   filmForm: FormGroup;
+  public selectedFilm?: Film;
 
   constructor(private modalService: BsModalService, private fb: FormBuilder, private http: HttpClient) {
     this.filmForm = this.fb.group({
@@ -29,6 +36,32 @@ export class FilmComponent {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+
+  openFilmUpdateForm(updateTemplate: TemplateRef<any>, film: Film) {
+    this.selectedFilm = film;
+
+    this.filmForm.setValue({
+      filmTitle: film.filmTitle,
+      releaseDate:film.releaseDate,
+    });
+
+    //if genres have not been loaded before, load and save them
+    if (this.originalGenreList.length == 0) {
+      var url = window.location.origin + "/genre/GetGenres";
+      this.http.get<Genre[]>(url).subscribe(data => {
+        // Set the data to a component property
+        this.originalGenreList = data;
+      });
+    }
+
+
+    //update release date form entry
+    this.filmForm.controls.releaseDate.patchValue(
+      new Date(film.releaseDate).toISOString().substring(0, 10) //strip the timestamp off the date
+    );
+
+    this.modalRef = this.modalService.show(updateTemplate);
   }
 
   closeModal() {
@@ -50,6 +83,7 @@ export class FilmComponent {
         filmId: -1,
         filmTitle: this.filmForm.value.filmTitle,
         releaseDate: this.filmForm.value.releaseDate as Date,
+        genreList: [],
       };
 
       var url = window.location.origin + "/film/CreateFilm";
@@ -62,6 +96,36 @@ export class FilmComponent {
     }
   }
 
+  onUpdateFilm() {
+    const updatedFilm = {
+      ...this.selectedFilm, // copy the selected row data
+      ...this.filmForm.value // overwrite the values with the new form data
+    };
+
+
+    var url = window.location.origin + "/film/UpdateFilm";
+    this.http.post(url, updatedFilm).subscribe(response => {
+      //var test = response.status;
+      this.getData();
+      this.closeModal();
+    });
+
+  }
+
+  onDeleteFilm( filmId: number) {
+    debugger
+
+    const confirm = window.confirm("Are you sure you would like to delete this film?");
+
+    if (confirm) {
+      var url = window.location.origin + "/film/DeleteFilm";
+      this.http.post(url, filmId).subscribe(response => {
+        this.getData();
+        this.closeModal();
+      });
+
+    }
+  }
   
 
   public dropped(files: NgxFileDropEntry[]) {
@@ -114,4 +178,10 @@ interface Film {
   filmId: number;
   filmTitle: string;
   releaseDate: Date;
+  genreList: Genre[];
+}
+
+interface Genre {
+  genreId: number;
+  genreName: string;
 }

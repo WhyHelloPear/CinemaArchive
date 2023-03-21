@@ -6,7 +6,9 @@ public class DataAccessMappingConfig : Profile
 {
     public DataAccessMappingConfig()
     {
-        CreateMap<FilmEntity, Film>();
+        CreateMap<FilmEntity, Film>()
+            .ForMember( f => f.GenreList, m => m.MapFrom( fe => fe.FilmGenreLinks.Select( fgl => fgl.Genre ) ) );
+
         CreateMap<Film, FilmEntity>()
             .ForMember( vm => vm.FilmId, m => m.Ignore() );
 

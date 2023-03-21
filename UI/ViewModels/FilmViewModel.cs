@@ -5,5 +5,6 @@
         public int FilmId { get; set; }
         public string FilmTitle { get; set; }
         public DateTime ReleaseDate { get; set; }
+        public List<GenreViewModel> GenreList { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace Infrastructure.DataAccess.Entities
         [Key][Required] public int FilmId { get; set; }
         [Required] public string FilmTitle { get; set; }
         [Required] public DateTime ReleaseDate { get; set; }
+        public ICollection<FilmGenreLinkEntity> FilmGenreLinks { get; set; }
     }
 }

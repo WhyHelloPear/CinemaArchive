@@ -8,5 +8,7 @@ namespace Domain.Contracts
         Task<int> GetNumFilms();
         Task<List<Film>> GetFilms();
         Task<Result> CreateFilm( Film filmToCreate );
+        Task<Result> UpdateFilm( Film filmToCreate );
+        Task<Result> DeleteFilm( int filmId );
     }
 }
