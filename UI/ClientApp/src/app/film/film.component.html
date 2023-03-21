@@ -2,7 +2,7 @@
   <table class="col-12 table">
     <thead>
       <tr>
-        <td colspan="3">
+        <td colspan="4">
           <button type="button" class="btn btn-primary" style="float:right" (click)="openModal(template)">Add Film</button>
         </td>
       </tr>
@@ -39,32 +39,6 @@
     </tbody>
   </table>
 </div>
-
-<div id="filmUploadFileDropDiv" class="center" hidden>
-  <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)"
-                 (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-    <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-      Optional custom content that replaces the the entire default content.
-      <button type="button" (click)="openFileSelector()">Browse Files</button>
-    </ng-template>
-  </ngx-file-drop>
-  <div class="upload-table">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Name</th>
-        </tr>
-      </thead>
-      <tbody class="upload-name-style">
-        <tr *ngFor="let item of files; let i=index">
-          <td><strong>{{ item.relativePath }}</strong></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-
 
 <ng-template #template>
   <div class="modal-header">
@@ -108,6 +82,23 @@
           <input type="date" formControlName="releaseDate" required class="form-control" placeholder="selectedFilm?.releaseDate" />
         </label>
       </div>
+      <div>
+          <p>Genres: </p>
+          <ng-container class="row" *ngFor="let genre of selectedGenres">
+              <span>
+                {{ genre.genreName }}
+                <button type="button" class="btn-close" aria-label="Close" (click)="RemoveAssociatedGenre(genre)"></button>
+              </span>
+          </ng-container>
+      </div>
+      <br />
+      <br />
+      <ng-container class="row" *ngFor="let genre of unselectedGenres">
+        <span>
+          {{ genre.genreName }}
+          <button type="button" class="btn-close" aria-label="Close" (click)="AddAssociatedGenre(genre)"></button>
+        </span>
+      </ng-container>
       <br />
       <button type="submit" [disabled]="filmForm.invalid">
         Save

@@ -48,7 +48,7 @@ export class GenreComponent {
         genreId: -1,
         genreName: this.genreForm.value.genreName,
       };
-      debugger
+
       var url = window.location.origin + "/genre/CreateGenre";
       this.http.post(url, newObject).subscribe(response => {
         //var test = response.status;

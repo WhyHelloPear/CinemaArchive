@@ -1,6 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -18,7 +17,6 @@ export class FilmComponent {
   public originalGenreList: Genre[] = [];
 
   public modalRef?: BsModalRef;
-  public files: NgxFileDropEntry[] = [];
 
   filmForm: FormGroup;
   public selectedFilm?: Film;
@@ -27,6 +25,12 @@ export class FilmComponent {
     this.filmForm = this.fb.group({
       filmTitle: ['', Validators.required],
       releaseDate: ['', Validators.required],
+    });
+
+    var url = window.location.origin + "/genre/GetGenres";
+    this.http.get<Genre[]>(url).subscribe(data => {
+      // Set the data to a component property
+      this.originalGenreList = data;
     });
   }
 
@@ -46,19 +50,18 @@ export class FilmComponent {
       releaseDate:film.releaseDate,
     });
 
-    //if genres have not been loaded before, load and save them
-    if (this.originalGenreList.length == 0) {
-      var url = window.location.origin + "/genre/GetGenres";
-      this.http.get<Genre[]>(url).subscribe(data => {
-        // Set the data to a component property
-        this.originalGenreList = data;
-      });
-    }
-
-
     //update release date form entry
     this.filmForm.controls.releaseDate.patchValue(
       new Date(film.releaseDate).toISOString().substring(0, 10) //strip the timestamp off the date
+    );
+
+    var selectedGenreIds = this.selectedFilm.genreList.map(g => g.genreId);
+
+    this.selectedGenres = this.originalGenreList.filter(
+      genre => selectedGenreIds.includes(genre.genreId)
+    );
+    this.unselectedGenres = this.originalGenreList.filter(
+      genre => !selectedGenreIds.includes(genre.genreId)
     );
 
     this.modalRef = this.modalService.show(updateTemplate);
@@ -113,8 +116,6 @@ export class FilmComponent {
   }
 
   onDeleteFilm( filmId: number) {
-    debugger
-
     const confirm = window.confirm("Are you sure you would like to delete this film?");
 
     if (confirm) {
@@ -126,51 +127,24 @@ export class FilmComponent {
 
     }
   }
-  
 
-  public dropped(files: NgxFileDropEntry[]) {
-    this.files = files;
-    for (const droppedFile of files) {
+  RemoveAssociatedGenre(genre: Genre) {
 
-      // Is it a file?
-      if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
+    this.unselectedGenres.push(genre);
 
-          // Here you can access the real file
-          console.log(droppedFile.relativePath, file);
-
-          /**
-          // You could upload it like this:
-          const formData = new FormData()
-          formData.append('logo', file, relativePath)
-
-          // Headers
-          const headers = new HttpHeaders({
-            'security-token': 'mytoken'
-          })
-
-          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
-          .subscribe(data => {
-            // Sanitized logo returned from backend
-          })
-          **/
-
-        });
-      } else {
-        // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
-      }
-    }
+    this.selectedGenres = this.selectedGenres.filter(
+      sg => sg.genreId != genre.genreId
+    )
   }
 
-  public fileOver(event:any) {
-    console.log(event);
-  }
+  AddAssociatedGenre(genre: Genre) {
 
-  public fileLeave(event:any) {
-    console.log(event);
+    this.selectedGenres.push(genre);
+
+    this.unselectedGenres = this.unselectedGenres.filter(
+      sg => sg.genreId != genre.genreId
+    )
+
   }
 }
 
