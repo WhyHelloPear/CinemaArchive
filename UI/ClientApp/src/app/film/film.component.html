@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <td colspan="4">
-          <button type="button" class="btn btn-primary" style="float:right" (click)="openModal(template)">Add Film</button>
+          <button type="button" class="btn btn-primary" style="float:right" (click)="openModal(filmTemplate)">Add Film</button>
         </td>
       </tr>
       <tr>
@@ -29,7 +29,7 @@
           </td>
 
           <td>
-            <button type="button" class="btn btn-link" (click)="openFilmUpdateForm(updateTemplate, film)">
+            <button type="button" class="btn btn-link" (click)="openFilmUpdateForm(filmTemplate, film)">
               Edit
             </button>
             <button type="button" class="btn btn-danger" (click)="onDeleteFilm(film.filmId)">Delete</button>
@@ -40,38 +40,12 @@
   </table>
 </div>
 
-<ng-template #template>
+<ng-template #filmTemplate>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
   </div>
   <div class="modal-body">
-    <form [formGroup]="filmForm" (ngSubmit)="onSubmit()" >
-      <label>
-        Title:
-        <input type="text" formControlName="filmTitle" required />
-      </label>
-      <div class="row form-group">
-        <label>
-          Release Date:
-          <input type="date" formControlName="releaseDate" required class="form-control"  />
-        </label>
-      </div>
-
-      <br />
-      <button type="submit" [disabled]="filmForm.invalid">
-        Save
-      </button>
-    </form>
-  </div>
-</ng-template>
-
-
-<ng-template #updateTemplate>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Edit Genre</h4>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="filmForm" (ngSubmit)="onUpdateFilm()">
+    <form [formGroup]="filmForm" (ngSubmit)="onSubmit()">
       <label>
         Title:
         <input type="text" formControlName="filmTitle" required />
@@ -83,13 +57,13 @@
         </label>
       </div>
       <div>
-          <p>Genres: </p>
-          <ng-container class="row" *ngFor="let genre of selectedGenres">
-              <span>
-                {{ genre.genreName }}
-                <button type="button" class="btn-close" aria-label="Close" (click)="RemoveAssociatedGenre(genre)"></button>
-              </span>
-          </ng-container>
+        <p>Genres: </p>
+        <ng-container class="row" *ngFor="let genre of selectedGenres">
+          <span>
+            {{ genre.genreName }}
+            <button type="button" class="btn-close" aria-label="Close" (click)="RemoveAssociatedGenre(genre)"></button>
+          </span>
+        </ng-container>
       </div>
       <br />
       <br />

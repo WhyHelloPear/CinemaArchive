@@ -11,6 +11,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class FilmComponent {
   //data entities used
   public films: Film[] = [];
+  public isNewFilmModel: Boolean = false;
 
   public selectedGenres: Genre[] = [];
   public unselectedGenres: Genre[] = [];
@@ -39,10 +40,14 @@ export class FilmComponent {
   }
 
   openModal(template: TemplateRef<any>) {
+    this.isNewFilmModel = true;
+    this.selectedGenres = [];
+    this.unselectedGenres = this.originalGenreList;
     this.modalRef = this.modalService.show(template);
   }
 
   openFilmUpdateForm(updateTemplate: TemplateRef<any>, film: Film) {
+    this.isNewFilmModel = false;
     this.selectedFilm = film;
 
     this.filmForm.setValue({
@@ -68,6 +73,9 @@ export class FilmComponent {
   }
 
   closeModal() {
+    this.selectedGenres = [];
+    this.unselectedGenres = this.originalGenreList;
+
     this.filmForm.reset();
     this.modalService.hide();
   }
@@ -82,29 +90,43 @@ export class FilmComponent {
 
   onSubmit() {
     if (this.filmForm.valid) {
-      var newObject: Film = {
-        filmId: -1,
-        filmTitle: this.filmForm.value.filmTitle,
-        releaseDate: this.filmForm.value.releaseDate as Date,
-        genreList: [],
-      };
+      if (this.isNewFilmModel) {
 
-      var url = window.location.origin + "/film/CreateFilm";
-      this.http.post(url, newObject).subscribe(response => {
-        //var test = response.status;
-        this.getData();
-        this.closeModal();
-      });
+
+
+        this.createFilm();
+      }
+      else {
+        
+        this.updateFilm();
+      }
+
+      
 
     }
   }
 
-  onUpdateFilm() {
+  createFilm() {
+    var newObject: Film = {
+      filmId: -1,
+      filmTitle: this.filmForm.value.filmTitle,
+      releaseDate: this.filmForm.value.releaseDate as Date,
+      genreList: [],
+    };
+    this.http.post(window.location.origin + "/film/CreateFilm", newObject).subscribe(response => {
+      //var test = response.status;
+      this.getData();
+      this.closeModal();
+    });
+  }
+
+  updateFilm() {
     const updatedFilm = {
       ...this.selectedFilm, // copy the selected row data
       ...this.filmForm.value // overwrite the values with the new form data
     };
 
+    updatedFilm.genreList = this.selectedGenres;
 
     var url = window.location.origin + "/film/UpdateFilm";
     this.http.post(url, updatedFilm).subscribe(response => {
