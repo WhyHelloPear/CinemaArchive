@@ -29,17 +29,24 @@ namespace Infrastructure.DataAccess.Repositories
             }
 
             FilmEntity newFilm = _mapper.Map<FilmEntity>( filmToCreate );
-            int newFilmId = _dbContext.Add( newFilm ).Entity.FilmId;
-
-            if(filmToCreate.GenreList.Any() ) {
-                _dbContext.AddRange(
-                    filmToCreate.GenreList.Select( g => new FilmGenreLinkEntity( newFilmId, g.GenreId ) )
-                );
-            }
+            _dbContext.FilmEntities.Add( newFilm );
 
             int numChanges = await _dbContext.SaveChangesAsync();
 
-            return numChanges > 0 ? Result.Ok() : Result.Fail( "Unable to save changes" );
+            if( numChanges == 0 ) {
+                return Result.Fail( "Unable to create film." );
+            }
+            else if(!filmToCreate.GenreList.Any() ) {
+                return Result.Ok();
+            }
+
+            _dbContext.AddRange(
+                filmToCreate.GenreList.Select( g => new FilmGenreLinkEntity( newFilm.FilmId, g.GenreId ) )
+            );
+
+            numChanges = await _dbContext.SaveChangesAsync();
+
+            return numChanges > 0 ? Result.Ok() : Result.Fail( "Unable to save genre links for new film." );
         }
 
         public async Task<Result> DeleteFilm( int filmId )

@@ -9,6 +9,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { FilmComponent } from './film/film.component';
 import { GenreComponent } from './genre/genre.component';
+import { PersonComponent } from './person/person.component';
+
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { FormBuilder } from '@angular/forms';
@@ -26,6 +28,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     HomeComponent,
     FilmComponent,
     GenreComponent,
+    PersonComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,6 +43,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'film', component: FilmComponent },
       { path: 'genre', component: GenreComponent },
+      { path: 'person', component: PersonComponent },
     ])
   ],
   providers: [

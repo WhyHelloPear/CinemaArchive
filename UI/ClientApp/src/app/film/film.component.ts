@@ -107,13 +107,13 @@ export class FilmComponent {
   }
 
   createFilm() {
-    var newObject: Film = {
+    var newFilm: Film = {
       filmId: -1,
       filmTitle: this.filmForm.value.filmTitle,
       releaseDate: this.filmForm.value.releaseDate as Date,
-      genreList: [],
+      genreList: this.selectedGenres,
     };
-    this.http.post(window.location.origin + "/film/CreateFilm", newObject).subscribe(response => {
+    this.http.post(window.location.origin + "/film/CreateFilm", newFilm).subscribe(response => {
       //var test = response.status;
       this.getData();
       this.closeModal();
