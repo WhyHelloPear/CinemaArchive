@@ -6,10 +6,13 @@ public class UIMapper : Profile
 {
     public UIMapper()
     {
-        CreateMap<FilmDto, FilmViewModel>();
-        CreateMap<FilmViewModel, FilmDto>();
+        CreateMap<FilmDto, FilmViewModel>()
+            .ReverseMap();
 
-        CreateMap<GenreDto, GenreViewModel>();
-        CreateMap<GenreViewModel, GenreDto>();
+        CreateMap<GenreDto, GenreViewModel>()
+            .ReverseMap();
+
+        CreateMap<PersonDto, PersonViewModel>()
+            .ReverseMap();
     }
 }

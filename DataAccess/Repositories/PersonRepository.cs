@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Core.Domain.Models;
 using Domain.Contracts;
-using FluentResults;
 using Infrastructure.DataAccess.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataAccess.Repositories
 {
@@ -17,49 +18,16 @@ namespace Infrastructure.DataAccess.Repositories
             _dbContext = dbContext;
         }
 
-        public Task<Result<int>> DeletePerson( int personId )
+        public async Task<int> GetNumPeople()
         {
-            throw new NotImplementedException();
+            return await _dbContext.PersonEntities.CountAsync();
         }
 
-        public Task<Result<int>> DeletePosition( int positionId )
+        public async Task<List<Person>> GetPeople()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> GetNumPeople()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Person>> GetPeople()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IQueryable<FilmRole>> GetPositions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result<int>> InsertPerson( Person person )
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result<int>> InsertPosition( FilmRole position )
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result<int>> UpdatePerson( Person person )
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result<int>> UpdatePosition( FilmRole position )
-        {
-            throw new NotImplementedException();
+            return await _dbContext.PersonEntities
+                .ProjectTo<Person>( _mapper.ConfigurationProvider )
+                .ToListAsync();
         }
     }
 }

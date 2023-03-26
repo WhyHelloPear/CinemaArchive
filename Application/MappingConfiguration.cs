@@ -6,10 +6,13 @@ public class MappingConfiguration : Profile
 {
     public MappingConfiguration()
     {
-        CreateMap<FilmDto, Film>();
-        CreateMap<Film, FilmDto>();
+        CreateMap<FilmDto, Film>()
+            .ReverseMap();
 
-        CreateMap<GenreDto, Genre>();
-        CreateMap<Genre, GenreDto>();
+        CreateMap<GenreDto, Genre>()
+            .ReverseMap();
+
+        CreateMap<PersonDto, Person>()
+            .ReverseMap();
     }
 }

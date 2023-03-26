@@ -1,1 +1,62 @@
-hey lol
+<div class="col-12">
+  <table class="table">
+    <thead>
+      <tr>
+        <td colspan="3">
+          <button type="button" class="btn btn-primary" style="float:right" (click)="openCreatePersonForm(personTemplate)">+ Add Person</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          First Name
+        </td>
+        <td>
+          Last Name
+        </td>
+        <td>
+          Birthday
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="people.length == 0">
+        <tr>
+          you're ugly
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="people.length > 0">
+        <tr *ngFor="let person in people">
+          <td>screw you</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #personTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
+      <label>
+        First Name:
+        <input type="text" formControlName="firstName" required />
+      </label>
+      <label>
+        Last Name:
+        <input type="text" formControlName="lastName" required />
+      </label>
+      <div class="row form-group">
+        <label>
+          Date of Birth:
+          <input type="date" formControlName="dateOfBirth" required class="form-control" />
+        </label>
+      </div>
+      <br />
+      <button type="submit" [disabled]="personForm.invalid">
+        Save
+      </button>
+    </form>
+  </div>
+</ng-template>

@@ -13,9 +13,11 @@ builder.Services.AddScoped<CinemaArchiveDbContext>();
 
 builder.Services.AddScoped<IFilmRepository, FilmRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 
 builder.Services.AddScoped<IFilmService, FilmService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 builder.Services.AddAutoMapper( typeof( MappingConfiguration ).Assembly );
 builder.Services.AddAutoMapper( typeof( DataAccessMappingConfig ).Assembly );

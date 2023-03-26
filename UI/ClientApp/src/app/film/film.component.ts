@@ -27,16 +27,15 @@ export class FilmComponent {
       filmTitle: ['', Validators.required],
       releaseDate: ['', Validators.required],
     });
-
-    var url = window.location.origin + "/genre/GetGenres";
-    this.http.get<Genre[]>(url).subscribe(data => {
-      // Set the data to a component property
-      this.originalGenreList = data;
-    });
   }
 
   ngOnInit(): void {
     this.getData();
+
+    this.http.get<Genre[]>(window.location.origin + "/genre/GetGenres").subscribe(data => {
+      // Set the data to a component property
+      this.originalGenreList = data;
+    });
   }
 
   openModal(template: TemplateRef<any>) {
@@ -91,18 +90,11 @@ export class FilmComponent {
   onSubmit() {
     if (this.filmForm.valid) {
       if (this.isNewFilmModel) {
-
-
-
         this.createFilm();
       }
       else {
-        
         this.updateFilm();
       }
-
-      
-
     }
   }
 
