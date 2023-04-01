@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Core.Application.DTOs;
+using Core.Domain.Models;
 using Domain.Contracts;
+using FluentResults;
 
 namespace Core.Application.Services
 {
@@ -13,6 +15,15 @@ namespace Core.Application.Services
         {
             _personRepository = personRepository;
             _mapper = mapper;
+        }
+
+        public async Task<Result> CreatePerson( PersonDto person )
+        {
+            Person personToCreate = _mapper.Map<Person>( person );
+
+            int numChanges = await _personRepository.CreatePerson(personToCreate );
+
+            return numChanges > 0 ? Result.Ok() : Result.Fail( "Screw you" );
         }
 
         public async Task<List<PersonDto>> GetPeople()

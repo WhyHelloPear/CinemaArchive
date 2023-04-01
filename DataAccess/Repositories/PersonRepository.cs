@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Core.Domain.Models;
 using Domain.Contracts;
 using Infrastructure.DataAccess.Contexts;
+using Infrastructure.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataAccess.Repositories
@@ -16,6 +17,15 @@ namespace Infrastructure.DataAccess.Repositories
         {
             _mapper = mapper;
             _dbContext = dbContext;
+        }
+
+        public async Task<int> CreatePerson( Person person )
+        {
+            PersonEntity newPerson = _mapper.Map<PersonEntity>( person );
+
+            _dbContext.PersonEntities.Add( newPerson );
+
+            return await _dbContext.SaveChangesAsync();
         }
 
         public async Task<int> GetNumPeople()

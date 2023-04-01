@@ -42,6 +42,9 @@ namespace Infrastructure.DataAccess.Contexts
 
             modelBuilder.Entity<FilmPersonLinkEntity>()
                 .HasKey( e => new { e.FilmId, e.PersonId, e.RoleId } );
+
+            modelBuilder.Entity<PersonEntity>()
+                .HasKey( p => p.PersonId );
         }
     }
 }

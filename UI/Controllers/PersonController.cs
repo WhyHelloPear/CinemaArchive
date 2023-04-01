@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.DTOs;
 using Core.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using UI.ViewModels;
@@ -31,6 +32,9 @@ namespace UI.Controllers
         [Route( "CreatePerson" )]
         public async Task<ActionResult<PersonViewModel>> CreatePerson([FromBody] PersonViewModel newPerson)
         {
+            PersonDto personDto = _mapper.Map<PersonDto>( newPerson );
+
+            var result = _personService.CreatePerson( personDto );
             return Ok();
         }
     }

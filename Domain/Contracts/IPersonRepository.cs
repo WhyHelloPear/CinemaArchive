@@ -8,5 +8,6 @@ namespace Domain.Contracts
         //Person Methods
         Task<int> GetNumPeople();
         Task<List<Person>> GetPeople();
+        Task<int> CreatePerson(Person person);
     }
 }
