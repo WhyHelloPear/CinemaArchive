@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Application.DTOs;
 using Core.Application.Services;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using UI.ViewModels;
 
@@ -30,11 +31,30 @@ namespace UI.Controllers
 
         [HttpPost]
         [Route( "CreatePerson" )]
-        public async Task<ActionResult<PersonViewModel>> CreatePerson([FromBody] PersonViewModel newPerson)
+        public async Task<ActionResult<PersonViewModel>> CreatePerson( [FromBody] PersonViewModel newPerson )
         {
             PersonDto personDto = _mapper.Map<PersonDto>( newPerson );
 
-            var result = _personService.CreatePerson( personDto );
+            var result = await _personService.CreatePerson( personDto );
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route( "UpdatePerson" )]
+        public async Task<ActionResult<PersonViewModel>> UpdatePerson( [FromBody] PersonViewModel personToUpdate )
+        {
+            PersonDto hey = _mapper.Map<PersonDto>( personToUpdate );
+            Result result = await _personService.UpdatePerson( hey );
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route( "DeletePerson" )]
+        public async Task<ActionResult<PersonViewModel>> DeletePerson( [FromBody] int personId )
+        {
+            Result result = await _personService.DeletePerson( personId );
+
             return Ok();
         }
     }

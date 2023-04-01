@@ -28,6 +28,20 @@ namespace Infrastructure.DataAccess.Repositories
             return await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<int> DeletePerson( int personId )
+        {
+            PersonEntity targetPerson = _dbContext.PersonEntities
+                .FirstOrDefault(p => p.PersonId == personId);
+
+            if ( targetPerson == null ) {
+                return 0;
+            }
+
+            _dbContext.Remove( targetPerson );
+
+            return await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<int> GetNumPeople()
         {
             return await _dbContext.PersonEntities.CountAsync();
@@ -38,6 +52,22 @@ namespace Infrastructure.DataAccess.Repositories
             return await _dbContext.PersonEntities
                 .ProjectTo<Person>( _mapper.ConfigurationProvider )
                 .ToListAsync();
+        }
+
+        public async Task<int> UpdatePerson( Person person )
+        {
+            PersonEntity existingPerson = _dbContext.PersonEntities
+                .FirstOrDefault(p => p.PersonId == person.PersonId);
+
+            if ( existingPerson == null ) {
+                return 0;
+            }
+
+            existingPerson.FirstName = person.FirstName;
+            existingPerson.LastName = person.LastName;
+            existingPerson.DateOfBirth = person.DateOfBirth;
+
+            return await _dbContext.SaveChangesAsync();
         }
     }
 }

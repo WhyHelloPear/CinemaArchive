@@ -126,7 +126,6 @@ export class FilmComponent {
       this.getData();
       this.closeModal();
     });
-
   }
 
   onDeleteFilm( filmId: number) {
@@ -136,7 +135,6 @@ export class FilmComponent {
       var url = window.location.origin + "/film/DeleteFilm";
       this.http.post(url, filmId).subscribe(response => {
         this.getData();
-        this.closeModal();
       });
 
     }

@@ -7,5 +7,7 @@ namespace Core.Application.Services
     {
         Task<List<PersonDto>> GetPeople();
         Task<Result> CreatePerson(PersonDto person);
+        Task<Result> UpdatePerson( PersonDto personToUpdate );
+        Task<Result> DeletePerson( int personId );
     }
 }

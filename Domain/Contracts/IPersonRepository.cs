@@ -9,5 +9,7 @@ namespace Domain.Contracts
         Task<int> GetNumPeople();
         Task<List<Person>> GetPeople();
         Task<int> CreatePerson(Person person);
+        Task<int> UpdatePerson( Person person );
+        Task<int> DeletePerson( int personId );
     }
 }

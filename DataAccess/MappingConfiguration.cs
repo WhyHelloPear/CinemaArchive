@@ -16,8 +16,9 @@ public class DataAccessMappingConfig : Profile
         CreateMap<Genre, GenreEntity>()
             .ForMember( vm => vm.GenreId, m => m.Ignore() );
 
-        CreateMap<Person, PersonEntity>();
         CreateMap<PersonEntity, Person>();
+        CreateMap<Person, PersonEntity>()
+            .ForMember( vm => vm.PersonId, m => m.Ignore() );
 
         CreateMap<FilmRole, FilmRoleEntity>();
         CreateMap<FilmRoleEntity, FilmRole>();
