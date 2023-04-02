@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { FilmComponent } from './film/film.component';
 import { GenreComponent } from './genre/genre.component';
 import { PersonComponent } from './person/person.component';
+import { FilmRoleComponent } from './filmRole/filmRole.component';
 
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
@@ -29,6 +30,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     FilmComponent,
     GenreComponent,
     PersonComponent,
+    FilmRoleComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -44,6 +46,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
       { path: 'film', component: FilmComponent },
       { path: 'genre', component: GenreComponent },
       { path: 'person', component: PersonComponent },
+      { path: 'filmRole', component: FilmRoleComponent },
     ])
   ],
   providers: [

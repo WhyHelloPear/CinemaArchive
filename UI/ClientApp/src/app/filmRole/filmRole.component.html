@@ -1,0 +1,54 @@
+<div id="filmRoleDataGrid">
+  <table class="table">
+    <thead>
+      <tr>
+        <td colspan="2">
+          <button type="button" class="btn btn-primary" style="float:right" (click)="openCreateFilmRoleForm(filmRoleTemplate)">+ Add Film Role</button>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          Film Role Name
+        </th>
+        <th>
+          Description
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="filmRoles.length == 0">
+        <tr>
+          <td colspan="2">fuck you</td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="filmRoles.length > 0">
+        <tr *ngFor="let filmRole of filmRoles">
+          <td>{{filmRole.filmRoleName}}</td>
+          <td>{{filmRole.description}}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #filmRoleTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="filmRoleForm" (ngSubmit)="onFilmRoleSubmit()">
+      <label>
+        Role Name:
+        <input type="text" formControlName="filmRoleName" required />
+      </label>
+      <label>
+        Description:
+        <input type="text" formControlName="description" />
+      </label>
+      <br />
+      <button type="submit" [disabled]="filmRoleForm.invalid">
+        Save
+      </button>
+    </form>
+  </div>
+</ng-template>

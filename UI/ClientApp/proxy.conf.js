@@ -10,6 +10,7 @@ const PROXY_CONFIG = [
       "/film",
       "/genre",
       "/person",
+      "/filmRole",
    ],
     target: target,
     secure: false,
