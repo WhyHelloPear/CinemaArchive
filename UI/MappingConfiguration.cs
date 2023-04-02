@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Application.DTOs;
+using Core.Domain.Models;
 using UI.ViewModels;
 
 public class UIMapper : Profile
@@ -13,6 +14,9 @@ public class UIMapper : Profile
             .ReverseMap();
 
         CreateMap<PersonDto, PersonViewModel>()
+            .ReverseMap();
+
+        CreateMap<FilmRoleDto, FilmRoleViewModel>()
             .ReverseMap();
     }
 }

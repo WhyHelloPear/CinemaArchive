@@ -6,7 +6,8 @@ namespace Infrastructure.DataAccess.Entities
     [Table( "FilmRole" )]
     public class FilmRoleEntity
     {
-        [Key][Required] public int RoleId { get; set; }
-        [Required] public string FilmRoleTitle { get; set; }
+        [Key][Required] public int FilmRoleId { get; set; }
+        [Required] public string FilmRoleName { get; set; }
+        public string Description { get; set; }
     }
 }

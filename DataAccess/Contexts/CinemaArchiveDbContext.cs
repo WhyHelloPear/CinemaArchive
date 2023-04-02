@@ -33,7 +33,7 @@ namespace Infrastructure.DataAccess.Contexts
                 .HasDatabaseName( "UQ_Genre_GenreName" );
 
             modelBuilder.Entity<FilmRoleEntity>()
-                .HasIndex( genre => genre.FilmRoleTitle )
+                .HasIndex( genre => genre.FilmRoleName )
                 .IsUnique()
                 .HasDatabaseName( "UQ_FilmRole_FilmRoleTitle" );
 

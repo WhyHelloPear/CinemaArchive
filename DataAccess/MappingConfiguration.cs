@@ -20,13 +20,8 @@ public class DataAccessMappingConfig : Profile
         CreateMap<Person, PersonEntity>()
             .ForMember( vm => vm.PersonId, m => m.Ignore() );
 
-        CreateMap<FilmRole, FilmRoleEntity>();
         CreateMap<FilmRoleEntity, FilmRole>();
-
-        CreateMap<FilmGenreLink, FilmGenreLinkEntity>();
-        CreateMap<FilmGenreLinkEntity, FilmGenreLink>();
-
-        CreateMap<FilmPersonLink, FilmPersonLinkEntity>();
-        CreateMap<FilmPersonLinkEntity, FilmPersonLink>();
+        CreateMap<FilmRole, FilmRoleEntity>()
+            .ForMember( vm => vm.FilmRoleId, m => m.Ignore() );
     }
 }

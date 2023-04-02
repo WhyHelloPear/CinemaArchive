@@ -6,6 +6,6 @@ namespace Core.Domain.Models
     {
         [Key][Required] public int FilmRoleId { get; set; }
         [Required] public string FilmRoleName { get; set; }
-        [Required] public string Description { get; set; }
+        public string Description { get; set; }
     }
 }
