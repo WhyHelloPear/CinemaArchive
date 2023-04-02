@@ -14,5 +14,8 @@ public class MappingConfiguration : Profile
 
         CreateMap<PersonDto, Person>()
             .ReverseMap();
+        
+        CreateMap<FilmRoleDto, FilmRole>()
+            .ReverseMap();
     }
 }

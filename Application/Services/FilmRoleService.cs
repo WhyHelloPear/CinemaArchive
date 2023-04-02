@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Domain.Contracts;
 using Core.Domain.Models;
+using FluentResults;
 
 namespace Core.Application.Services
 {
@@ -13,6 +14,14 @@ namespace Core.Application.Services
         {
             _filmRoleRepository = filmRoleRepository;
             _mapper = mapper;
+        }
+
+        public async Task<Result> CreateFilmRole( FilmRoleDto filmRoleDto )
+        {
+            FilmRole filmRole = _mapper.Map<FilmRole>( filmRoleDto );
+            int numChanges = await _filmRoleRepository.CreateFilmRole( filmRole );
+
+            return numChanges > 0 ? Result.Ok() : Result.Fail( "No changes made" );
         }
 
         public async Task<List<FilmRoleDto>> GetFilmRoles()

@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Core.Domain.Contracts;
 using Core.Domain.Models;
 using Infrastructure.DataAccess.Contexts;
+using Infrastructure.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DataAccess.Repositories
@@ -16,6 +17,15 @@ namespace Infrastructure.DataAccess.Repositories
         {
             _dbContext = dbContext;
             _mapper = mapper;
+        }
+
+        public async Task<int> CreateFilmRole( FilmRole filmRole )
+        {
+            FilmRoleEntity newEntity = _mapper.Map<FilmRoleEntity>( filmRole );
+
+            _dbContext.FilmRoleEntities.Add( newEntity );
+
+            return await _dbContext.SaveChangesAsync();
         }
 
         public async Task<List<FilmRole>> GetFilmRoles()

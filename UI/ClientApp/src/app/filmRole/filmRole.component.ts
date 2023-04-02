@@ -17,7 +17,7 @@ export class FilmRoleComponent {
   constructor(private http: HttpClient, private fb: FormBuilder, private modalService: BsModalService) {
     this.filmRoleForm = this.fb.group({
       filmRoleName: ['', Validators.required],
-      filmRoleDescription: [''],
+      description: [''],
     });
   }
 
