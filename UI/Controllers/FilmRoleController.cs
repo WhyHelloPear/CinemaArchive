@@ -39,5 +39,25 @@ namespace UI.Controllers
 
             return Ok();
         }
+
+        [HttpPost]
+        [Route( "UpdateFilmRole" )]
+        public async Task<ActionResult<FilmRoleViewModel>> UpdateFilmRole( [FromBody] FilmRoleViewModel newFilmRole )
+        {
+            FilmRoleDto filmRoleDto = _mapper.Map<FilmRoleDto>( newFilmRole );
+
+            Result result = await _filmRoleService.UpdateFilmRole( filmRoleDto );
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route( "DeleteFilmRole" )]
+        public async Task<ActionResult<FilmRoleViewModel>> CreateFilmRole( [FromBody] int filmRoleId )
+        {
+            Result result = await _filmRoleService.DeleteFilmRole( filmRoleId );
+
+            return Ok();
+        }
     }
 }

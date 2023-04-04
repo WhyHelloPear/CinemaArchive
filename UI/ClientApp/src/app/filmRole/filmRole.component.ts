@@ -13,6 +13,7 @@ export class FilmRoleComponent {
   public filmRoleForm: FormGroup;
   public modalRef?: BsModalRef;
   public isNewFilmRole: boolean = false;
+  public selectedFilmRole?: FilmRole;
 
   constructor(private http: HttpClient, private fb: FormBuilder, private modalService: BsModalService) {
     this.filmRoleForm = this.fb.group({
@@ -47,7 +48,7 @@ export class FilmRoleComponent {
         this.createFilmRole();
       }
       else {
-
+        this.updateFilmRole();
       }
     }
   }
@@ -63,6 +64,43 @@ export class FilmRoleComponent {
       this.getFilmRoleData();
       this.hideFilmRoleForm();
     });
+  }
+
+  updateFilmRole() {
+    const updatedFilm = {
+      ...this.selectedFilmRole, // copy the selected row data
+      ...this.filmRoleForm.value // overwrite the values with the new form data
+    };
+
+    var url = window.location.origin + "/filmRole/UpdateFilmRole";
+    this.http.post(url, updatedFilm).subscribe(response => {
+      this.getFilmRoleData();
+      this.hideFilmRoleForm();
+    });
+  }
+
+  openUpdateFilmRoleForm(updateTemplate: TemplateRef<any>, filmRole: FilmRole) {
+    this.isNewFilmRole = false;
+    this.selectedFilmRole = filmRole;
+
+    this.filmRoleForm.setValue({
+      filmRoleName: filmRole.filmRoleName,
+      description: filmRole.description,
+    });
+
+    this.modalRef = this.modalService.show(updateTemplate);
+  }
+
+  onDeleteFilmRole(filmRoleId: number) {
+    const confirm = window.confirm("Are you sure you would like to delete this film?");
+
+    if (confirm) {
+      var url = window.location.origin + "/filmRole/DeleteFilmRole";
+      this.http.post(url, filmRoleId).subscribe(response => {
+        this.getFilmRoleData();
+      });
+
+    }
   }
 }
 

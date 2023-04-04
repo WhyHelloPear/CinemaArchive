@@ -28,11 +28,38 @@ namespace Infrastructure.DataAccess.Repositories
             return await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<int> DeleteFilmRole( int filmRoleId )
+        {
+            FilmRoleEntity existingFilmRole = _dbContext.FilmRoleEntities.FirstOrDefault(fr => fr.FilmRoleId == filmRoleId);
+
+            if(existingFilmRole == null ) {
+                return 0;
+            }
+
+            _dbContext.FilmRoleEntities.Remove( existingFilmRole );
+
+            return await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<List<FilmRole>> GetFilmRoles()
         {
             return await _dbContext.FilmRoleEntities
                 .ProjectTo<FilmRole>( _mapper.ConfigurationProvider )
                 .ToListAsync();
+        }
+
+        public async Task<int> UpdateFilmRole( FilmRole roleToUpdate )
+        {
+            FilmRoleEntity? existingFilmRole = _dbContext.FilmRoleEntities.FirstOrDefault(fr => fr.FilmRoleId==roleToUpdate.FilmRoleId);
+
+            if(existingFilmRole == null) {
+                return 0;
+            }
+
+            existingFilmRole.FilmRoleName = roleToUpdate.FilmRoleName;
+            existingFilmRole.Description = roleToUpdate.Description;
+
+            return await _dbContext.SaveChangesAsync();
         }
     }
 }

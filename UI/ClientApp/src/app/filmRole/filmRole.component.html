@@ -25,6 +25,12 @@
         <tr *ngFor="let filmRole of filmRoles">
           <td>{{filmRole.filmRoleName}}</td>
           <td>{{filmRole.description}}</td>
+          <td>
+            <button type="button" class="btn btn-link" (click)="openUpdateFilmRoleForm(filmRoleTemplate, filmRole)">
+              Edit
+            </button>
+            <button type="button" class="btn btn-danger" (click)="onDeleteFilmRole(filmRole.filmRoleId)">Delete</button>
+          </td>
         </tr>
       </ng-container>
     </tbody>
