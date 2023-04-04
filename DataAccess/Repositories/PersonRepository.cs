@@ -31,9 +31,9 @@ namespace Infrastructure.DataAccess.Repositories
         public async Task<int> DeletePerson( int personId )
         {
             PersonEntity targetPerson = _dbContext.PersonEntities
-                .FirstOrDefault(p => p.PersonId == personId);
+                .FirstOrDefault( p => p.PersonId == personId );
 
-            if ( targetPerson == null ) {
+            if( targetPerson == null ) {
                 return 0;
             }
 
@@ -57,9 +57,9 @@ namespace Infrastructure.DataAccess.Repositories
         public async Task<int> UpdatePerson( Person person )
         {
             PersonEntity existingPerson = _dbContext.PersonEntities
-                .FirstOrDefault(p => p.PersonId == person.PersonId);
+                .FirstOrDefault( p => p.PersonId == person.PersonId );
 
-            if ( existingPerson == null ) {
+            if( existingPerson == null ) {
                 return 0;
             }
 

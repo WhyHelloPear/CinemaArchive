@@ -8,17 +8,17 @@ namespace Infrastructure.DataAccess.Migrations
     public partial class UpdateFilmRoleTable : Migration
     {
         /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
+        protected override void Up( MigrationBuilder migrationBuilder )
         {
             migrationBuilder.RenameColumn(
                 name: "FilmRoleTitle",
                 table: "FilmRole",
-                newName: "FilmRoleName");
+                newName: "FilmRoleName" );
 
             migrationBuilder.RenameColumn(
                 name: "RoleId",
                 table: "FilmRole",
-                newName: "FilmRoleId");
+                newName: "FilmRoleId" );
 
             migrationBuilder.AlterColumn<string>(
                 name: "LastName",
@@ -26,42 +26,42 @@ namespace Infrastructure.DataAccess.Migrations
                 type: "nvarchar(60)",
                 maxLength: 60,
                 nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)");
+                oldClrType: typeof( string ),
+                oldType: "nvarchar(max)" );
 
             migrationBuilder.AddColumn<string>(
                 name: "Description",
                 table: "FilmRole",
                 type: "nvarchar(max)",
                 nullable: true,
-                defaultValue: "");
+                defaultValue: "" );
         }
 
         /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
+        protected override void Down( MigrationBuilder migrationBuilder )
         {
             migrationBuilder.DropColumn(
                 name: "Description",
-                table: "FilmRole");
+                table: "FilmRole" );
 
             migrationBuilder.RenameColumn(
                 name: "FilmRoleName",
                 table: "FilmRole",
-                newName: "FilmRoleTitle");
+                newName: "FilmRoleTitle" );
 
             migrationBuilder.RenameColumn(
                 name: "FilmRoleId",
                 table: "FilmRole",
-                newName: "RoleId");
+                newName: "RoleId" );
 
             migrationBuilder.AlterColumn<string>(
                 name: "LastName",
                 table: "Person",
                 type: "nvarchar(max)",
                 nullable: false,
-                oldClrType: typeof(string),
+                oldClrType: typeof( string ),
                 oldType: "nvarchar(60)",
-                oldMaxLength: 60);
+                oldMaxLength: 60 );
         }
     }
 }

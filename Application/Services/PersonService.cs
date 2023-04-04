@@ -21,7 +21,7 @@ namespace Core.Application.Services
         {
             Person personToCreate = _mapper.Map<Person>( person );
 
-            int numChanges = await _personRepository.CreatePerson(personToCreate );
+            int numChanges = await _personRepository.CreatePerson( personToCreate );
 
             return numChanges > 0 ? Result.Ok() : Result.Fail( "Screw you" );
         }
@@ -36,7 +36,7 @@ namespace Core.Application.Services
         public async Task<List<PersonDto>> GetPeople()
         {
             var people = await _personRepository.GetPeople();
-            
+
             return _mapper.Map<List<PersonDto>>( people );
         }
 

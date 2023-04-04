@@ -36,7 +36,7 @@ namespace Infrastructure.DataAccess.Repositories
             if( numChanges == 0 ) {
                 return Result.Fail( "Unable to create film." );
             }
-            else if(!filmToCreate.GenreList.Any() ) {
+            else if( !filmToCreate.GenreList.Any() ) {
                 return Result.Ok();
             }
 
@@ -52,7 +52,7 @@ namespace Infrastructure.DataAccess.Repositories
         public async Task<Result> DeleteFilm( int filmId )
         {
             FilmEntity? targetFilm = _dbContext.FilmEntities
-                .Include(f => f.FilmGenreLinks)
+                .Include( f => f.FilmGenreLinks )
                 .FirstOrDefault( f => f.FilmId == filmId );
 
             if( targetFilm == null ) {

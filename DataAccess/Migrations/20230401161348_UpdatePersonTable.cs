@@ -8,7 +8,7 @@ namespace Infrastructure.DataAccess.Migrations
     public partial class UpdatePersonTable : Migration
     {
         /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
+        protected override void Up( MigrationBuilder migrationBuilder )
         {
             migrationBuilder.AddColumn<string>(
                 name: "FirstName",
@@ -36,19 +36,19 @@ namespace Infrastructure.DataAccess.Migrations
         }
 
         /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
+        protected override void Down( MigrationBuilder migrationBuilder )
         {
             migrationBuilder.DropColumn(
                 name: "FirstName",
-                table: "Person" 
+                table: "Person"
             );
             migrationBuilder.DropColumn(
                 name: "LastName",
-                table: "Person" 
+                table: "Person"
             );
             migrationBuilder.DropColumn(
                 name: "DateOfBirth",
-                table: "Person" 
+                table: "Person"
             );
             migrationBuilder.AddColumn<string>(
                 name: "PersonName",

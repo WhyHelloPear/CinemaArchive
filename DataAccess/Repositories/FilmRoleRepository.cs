@@ -30,9 +30,9 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task<int> DeleteFilmRole( int filmRoleId )
         {
-            FilmRoleEntity existingFilmRole = _dbContext.FilmRoleEntities.FirstOrDefault(fr => fr.FilmRoleId == filmRoleId);
+            FilmRoleEntity existingFilmRole = _dbContext.FilmRoleEntities.FirstOrDefault( fr => fr.FilmRoleId == filmRoleId );
 
-            if(existingFilmRole == null ) {
+            if( existingFilmRole == null ) {
                 return 0;
             }
 
@@ -50,9 +50,9 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task<int> UpdateFilmRole( FilmRole roleToUpdate )
         {
-            FilmRoleEntity? existingFilmRole = _dbContext.FilmRoleEntities.FirstOrDefault(fr => fr.FilmRoleId==roleToUpdate.FilmRoleId);
+            FilmRoleEntity? existingFilmRole = _dbContext.FilmRoleEntities.FirstOrDefault( fr => fr.FilmRoleId == roleToUpdate.FilmRoleId );
 
-            if(existingFilmRole == null) {
+            if( existingFilmRole == null ) {
                 return 0;
             }
 

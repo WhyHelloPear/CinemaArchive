@@ -36,14 +36,14 @@ namespace Infrastructure.DataAccess.Repositories
 
         public async Task<Result> DeleteGenre( int genreId )
         {
-            GenreEntity? targetGenre = _dbContext.GenreEntities.FirstOrDefault(g => g.GenreId == genreId );
+            GenreEntity? targetGenre = _dbContext.GenreEntities.FirstOrDefault( g => g.GenreId == genreId );
 
             if( targetGenre == null ) {
                 return Result.Fail( "Unable to find genre to delete." );
             }
 
             _dbContext.GenreEntities.Remove( targetGenre );
-            int changesMade = await _dbContext.SaveChangesAsync( );
+            int changesMade = await _dbContext.SaveChangesAsync();
 
             return changesMade > 0 ? Result.Ok() : Result.Fail( "Unable to delete genre." );
         }
@@ -68,7 +68,7 @@ namespace Infrastructure.DataAccess.Repositories
                 return Result.Fail( "Unable to find existing genre with matching id." );
             }
 
-            if(_dbContext.GenreEntities.Any( g => g.GenreName == genreToUpdate.GenreName ) ) {
+            if( _dbContext.GenreEntities.Any( g => g.GenreName == genreToUpdate.GenreName ) ) {
                 return Result.Fail( "Genre with name already exists." );
             }
 

@@ -35,7 +35,7 @@ namespace Core.Application.Services
         {
             List<FilmRole> filmRoles = await _filmRoleRepository.GetFilmRoles();
 
-            return _mapper.Map<List<FilmRoleDto>>(filmRoles );
+            return _mapper.Map<List<FilmRoleDto>>( filmRoles );
         }
 
         public async Task<Result> UpdateFilmRole( FilmRoleDto filmRoleDto )
