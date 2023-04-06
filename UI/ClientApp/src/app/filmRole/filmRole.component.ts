@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
+import { FilmRole } from '../../models/FilmRole'
+
 @Component({
   selector: 'app-home',
   templateUrl: './filmRole.component.html',
@@ -102,10 +104,4 @@ export class FilmRoleComponent {
 
     }
   }
-}
-
-interface FilmRole {
-  filmRoleId: number;
-  filmRoleName: string;
-  description: string;
 }

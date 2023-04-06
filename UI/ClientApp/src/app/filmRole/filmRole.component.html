@@ -2,7 +2,7 @@
   <table class="table">
     <thead>
       <tr>
-        <td colspan="2">
+        <td colspan="3">
           <button type="button" class="btn btn-primary" style="float:right" (click)="openCreateFilmRoleForm(filmRoleTemplate)">+ Add Film Role</button>
         </td>
       </tr>
@@ -23,13 +23,13 @@
       </ng-container>
       <ng-container *ngIf="filmRoles.length > 0">
         <tr *ngFor="let filmRole of filmRoles">
-          <td>{{filmRole.filmRoleName}}</td>
+          <td class="col-sm-3">{{filmRole.filmRoleName}}</td>
           <td>{{filmRole.description}}</td>
           <td>
-            <button type="button" class="btn btn-link" (click)="openUpdateFilmRoleForm(filmRoleTemplate, filmRole)">
+            <button type="button" class="btn btn-secondary" style="width:100%" (click)="openUpdateFilmRoleForm(filmRoleTemplate, filmRole)">
               Edit
             </button>
-            <button type="button" class="btn btn-danger" (click)="onDeleteFilmRole(filmRole.filmRoleId)">Delete</button>
+            <button type="button" class="btn btn-danger" style="width:100%" (click)="onDeleteFilmRole(filmRole.filmRoleId)">Delete</button>
           </td>
         </tr>
       </ng-container>
@@ -43,16 +43,16 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="filmRoleForm" (ngSubmit)="onFilmRoleSubmit()">
-      <label>
-        Role Name:
-        <input type="text" formControlName="filmRoleName" required />
-      </label>
-      <label>
-        Description:
-        <input type="text" formControlName="description" />
-      </label>
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Role Name</label>
+        <input class="form-control" placeholder="Test" formControlName="filmRoleName" >
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+        <textarea class="form-control" type="text" formControlName="description" rows="3"></textarea>
+      </div>
       <br />
-      <button type="submit" [disabled]="filmRoleForm.invalid">
+      <button type="submit" class="btn btn-primary" [disabled]="filmRoleForm.invalid">
         Save
       </button>
     </form>

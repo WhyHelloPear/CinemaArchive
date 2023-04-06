@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
+import { Person } from '../../models/Person'
+
 @Component({
   selector: 'app-home',
   templateUrl: './person.component.html',
@@ -111,11 +113,4 @@ export class PersonComponent {
       this.getPeopleData();
     });
   }
-}
-
-interface Person {
-  personId: number;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
 }

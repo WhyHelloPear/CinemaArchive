@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
+import { Film } from '../../models/Film'
+import { Genre } from '../../models/Genre'
+
 @Component({
   selector: 'app-home',
   templateUrl: './film.component.html',
@@ -158,16 +161,4 @@ export class FilmComponent {
     )
 
   }
-}
-
-interface Film {
-  filmId: number;
-  filmTitle: string;
-  releaseDate: Date;
-  genreList: Genre[];
-}
-
-interface Genre {
-  genreId: number;
-  genreName: string;
 }

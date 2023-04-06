@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
+import { Genre } from '../../models/Genre'
+
 @Component({
   selector: 'app-home',
   templateUrl: './genre.component.html',
@@ -96,9 +98,4 @@ export class GenreComponent {
     });
     this.modalRef = this.modalService.show(template);
   }
-}
-
-interface Genre {
-  genreId: number;
-  genreName: string;
 }
