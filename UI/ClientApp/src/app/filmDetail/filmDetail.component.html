@@ -1,0 +1,22 @@
+<h1>{{targetFilm.filmTitle}}</h1>
+<div class="row">
+  <div class="col-sm-4">
+    fuck off
+  </div>
+  <div class="col-sm-8">
+    <h2>test</h2>
+    <h3>hey</h3>
+  </div>
+</div>
+<div>best star wars date ever</div>
+
+<div>
+  <ng-container *ngIf="targetFilm.filmPersonLinks.length > 0">
+    <table>
+        <tr *ngFor="let link of targetFilm.filmPersonLinks">
+          <td>{{link.personLastName}}, {{link.personFirstName}}</td>
+          <td>{{link.filmRoleName}}</td>
+        </tr>
+    </table>
+  </ng-container>
+</div>

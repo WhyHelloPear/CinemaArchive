@@ -66,11 +66,34 @@ namespace Infrastructure.DataAccess.Repositories
             return numChanges > 0 ? Result.Ok() : Result.Fail( "Unable to delete film." );
         }
 
+        public async Task<Film> GetFilm( int id )
+        {
+            FilmEntity? existingFilm = await _dbContext.FilmEntities
+                .Include(f => f.FilmGenreLinks)
+
+                .Include(f => f.FilmPersonLinks)
+                    .ThenInclude(fpl => fpl.Person)
+                .Include( f => f.FilmPersonLinks )
+                    .ThenInclude( fpl => fpl.FilmRole )
+
+
+
+
+                .FirstOrDefaultAsync( f => f.FilmId == id );
+
+            if( existingFilm == null ) {
+                return null;
+            }
+
+            return _mapper.Map<Film>( existingFilm );
+        }
+
         public async Task<List<Film>> GetFilms()
         {
             return await _dbContext.FilmEntities
                 .Include( i => i.FilmGenreLinks )
-                .ThenInclude( i => i.Genre )
+                    .ThenInclude( i => i.Genre )
+                .Include( i => i.FilmPersonLinks )
                 .ProjectTo<Film>( _mapper.ConfigurationProvider )
                 .ToListAsync();
         }

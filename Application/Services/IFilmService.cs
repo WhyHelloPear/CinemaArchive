@@ -10,5 +10,6 @@ namespace Core.Application.Services
         Task<Result> UpdateFilm( FilmDto filmToUpdate );
         Task<Result> DeleteFilm( int filmId );
         Task<int> GetFilmCount();
+        Task<FilmDto> GetFilm( int id );
     }
 }

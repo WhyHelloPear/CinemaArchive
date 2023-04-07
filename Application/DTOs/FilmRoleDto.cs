@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.Domain.Models
+namespace Core.Application.DTOs
 {
     public class FilmRoleDto
     {

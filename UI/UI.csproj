@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\filmDetail\filmDetail.component.ts" />
     <None Remove="ClientApp\src\app\filmRole\filmRole.component.ts" />
     <None Remove="ClientApp\src\app\genre\genre.component.ts" />
     <None Remove="ClientApp\src\app\person\person.component.ts" />
@@ -34,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\filmDetail\filmDetail.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\filmRole\filmRole.component.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

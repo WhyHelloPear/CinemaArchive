@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.DTOs;
 using Core.Domain.Contracts;
 using Core.Domain.Models;
 using FluentResults;

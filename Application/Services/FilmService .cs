@@ -45,5 +45,12 @@ namespace Core.Application.Services
         {
             return _filmRepository.DeleteFilm( filmId );
         }
+
+        public async Task<FilmDto> GetFilm( int id )
+        {
+            Film film = await _filmRepository.GetFilm( id );
+
+            return _mapper.Map<FilmDto>( film );
+        }
     }
 }

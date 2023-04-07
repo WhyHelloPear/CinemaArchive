@@ -29,9 +29,8 @@
           </td>
 
           <td>
-            <button type="button" class="btn btn-link" (click)="openFilmUpdateForm(filmTemplate, film)">
-              Edit
-            </button>
+            <button type="button" class="btn btn-primary" (click)="showFilmDetails(film.filmId)">View</button>
+            <button type="button" class="btn btn-secondary" (click)="openFilmUpdateForm(filmTemplate, film)">Edit</button>
             <button type="button" class="btn btn-danger" (click)="onDeleteFilm(film.filmId)">Delete</button>
           </td>
         </tr>

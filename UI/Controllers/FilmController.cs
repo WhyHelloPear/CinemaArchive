@@ -26,7 +26,19 @@ namespace UI.Controllers
         {
             var films = await _filmService.GetFilms();
 
-            return Ok( _mapper.Map<List<FilmViewModel>>( films ) );
+            List<FilmViewModel> value = _mapper.Map<List<FilmViewModel>>( films );
+
+            return base.Ok( value );
+        }
+
+        [HttpGet]
+        [Route( "GetFilm" )]
+        public async Task<ActionResult<FilmViewModel>> GetFilm(int id)
+        {
+            FilmDto film = await _filmService.GetFilm( id );
+
+            FilmViewModel value = _mapper.Map<FilmViewModel>( film );
+            return base.Ok( value );
         }
 
         [HttpGet]

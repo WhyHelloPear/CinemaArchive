@@ -22,9 +22,9 @@ builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IFilmRoleService, FilmRoleService>();
 
-builder.Services.AddAutoMapper( typeof( MappingConfiguration ).Assembly );
+builder.Services.AddAutoMapper( typeof( ApplicationMappingConfig ).Assembly );
 builder.Services.AddAutoMapper( typeof( DataAccessMappingConfig ).Assembly );
-builder.Services.AddAutoMapper( typeof( UIMapper ).Assembly );
+builder.Services.AddAutoMapper( typeof( UIMappingConfig ).Assembly );
 
 var app = builder.Build();
 

@@ -11,6 +11,7 @@ import { FilmComponent } from './film/film.component';
 import { GenreComponent } from './genre/genre.component';
 import { PersonComponent } from './person/person.component';
 import { FilmRoleComponent } from './filmRole/filmRole.component';
+import { FilmDetailComponent } from './filmDetail/filmDetail.component';
 
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
@@ -41,12 +42,16 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     FormsModule,
+
+
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'film', component: FilmComponent },
+      { path: 'film/:id', component: FilmDetailComponent },
       { path: 'genre', component: GenreComponent },
       { path: 'person', component: PersonComponent },
       { path: 'filmRole', component: FilmRoleComponent },
+      //{ path: '**', redirectTo: '' },
     ])
   ],
   providers: [

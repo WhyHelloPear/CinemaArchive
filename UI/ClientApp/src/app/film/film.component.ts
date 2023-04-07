@@ -1,4 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -25,7 +26,7 @@ export class FilmComponent {
   filmForm: FormGroup;
   public selectedFilm?: Film;
 
-  constructor(private modalService: BsModalService, private fb: FormBuilder, private http: HttpClient) {
+  constructor(private modalService: BsModalService, private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.filmForm = this.fb.group({
       filmTitle: ['', Validators.required],
       releaseDate: ['', Validators.required],
@@ -107,6 +108,7 @@ export class FilmComponent {
       filmTitle: this.filmForm.value.filmTitle,
       releaseDate: this.filmForm.value.releaseDate as Date,
       genreList: this.selectedGenres,
+      filmPersonLinks: [],
     };
     this.http.post(window.location.origin + "/film/CreateFilm", newFilm).subscribe(response => {
       //var test = response.status;
@@ -160,5 +162,9 @@ export class FilmComponent {
       sg => sg.genreId != genre.genreId
     )
 
+  }
+
+  showFilmDetails(id: number) {
+    this.router.navigate(['/film', id]);
   }
 }

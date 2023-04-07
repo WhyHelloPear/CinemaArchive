@@ -10,5 +10,6 @@ namespace Domain.Contracts
         Task<Result> CreateFilm( Film filmToCreate );
         Task<Result> UpdateFilm( Film filmToCreate );
         Task<Result> DeleteFilm( int filmId );
+        Task<Film> GetFilm( int id );
     }
 }

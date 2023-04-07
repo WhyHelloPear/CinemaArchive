@@ -38,10 +38,12 @@ namespace Infrastructure.DataAccess.Contexts
                 .HasDatabaseName( "UQ_FilmRole_FilmRoleTitle" );
 
             modelBuilder.Entity<FilmGenreLinkEntity>()
-                .HasKey( e => new { e.FilmId, e.GenreId } );
+                .HasKey( e => new { e.FilmId, e.GenreId } )
+                .IsClustered();
 
             modelBuilder.Entity<FilmPersonLinkEntity>()
-                .HasKey( e => new { e.FilmId, e.PersonId, e.RoleId } );
+                .HasKey( e => new { e.FilmId, e.PersonId, e.FilmRoleId } )
+                .IsClustered();
 
             modelBuilder.Entity<PersonEntity>()
                 .HasKey( p => p.PersonId );

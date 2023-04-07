@@ -8,5 +8,6 @@ namespace Core.Domain.Models
         [Required] public string FilmTitle { get; set; }
         [Required] public DateTime ReleaseDate { get; set; }
         public List<Genre> GenreList { get; set; }
+        public List<FilmPersonLink> FilmPersonLinks { get; set; }
     }
 }

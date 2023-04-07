@@ -7,5 +7,6 @@
         public DateTime ReleaseDate { get; set; }
         public decimal GrossRevenue { get; set; }
         public List<GenreDto> GenreList { get; set; }
+        public List<FilmPersonLinkDto> FilmPersonLinks { get; set; }
     }
 }

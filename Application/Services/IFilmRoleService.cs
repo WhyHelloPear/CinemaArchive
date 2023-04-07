@@ -1,4 +1,4 @@
-﻿using Core.Domain.Models;
+﻿using Core.Application.DTOs;
 using FluentResults;
 
 namespace Core.Application.Services
