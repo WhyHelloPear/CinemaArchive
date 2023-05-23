@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using Core.Application.DTOs;
 using Core.Domain.Models;
 using Domain.Contracts;
 using FluentResults;
 
-namespace Core.Application.Services
+namespace Core.Domain.Services
 {
     public class FilmService : IFilmService
     {
@@ -22,23 +21,19 @@ namespace Core.Application.Services
             return await _filmRepository.GetNumFilms();
         }
 
-        public async Task<List<FilmDto>> GetFilms()
+        public async Task<List<Film>> GetFilms()
         {
-            var films = await _filmRepository.GetFilms();
-            return _mapper.Map<List<FilmDto>>( films );
+            return await _filmRepository.GetFilms();
         }
 
-        public async Task<Result> CreateFilm( FilmDto filmToCreate )
+        public async Task<Result> CreateFilm( Film filmToCreate )
         {
-            Film film = _mapper.Map<Film>( filmToCreate );
-
-            return await _filmRepository.CreateFilm( film );
+            return await _filmRepository.CreateFilm( filmToCreate );
         }
 
-        public Task<Result> UpdateFilm( FilmDto filmToUpdate )
+        public Task<Result> UpdateFilm( Film filmToUpdate )
         {
-            Film film = _mapper.Map<Film>( filmToUpdate );
-            return _filmRepository.UpdateFilm( film );
+            return _filmRepository.UpdateFilm( filmToUpdate );
         }
 
         public Task<Result> DeleteFilm( int filmId )
@@ -46,11 +41,9 @@ namespace Core.Application.Services
             return _filmRepository.DeleteFilm( filmId );
         }
 
-        public async Task<FilmDto> GetFilm( int id )
+        public async Task<Film> GetFilm( int id )
         {
-            Film film = await _filmRepository.GetFilm( id );
-
-            return _mapper.Map<FilmDto>( film );
+            return await _filmRepository.GetFilm( id );
         }
     }
 }

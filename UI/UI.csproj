@@ -11,6 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentResults" Version="3.15.2" />
     <PackageReference Include="Geocoding.Core" Version="4.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.13" />
@@ -31,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\Core.Application.csproj" />
+    <ProjectReference Include="..\DataAccess\Infrastructure.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>

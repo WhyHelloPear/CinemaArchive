@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using Core.Application.DTOs;
 using Core.Domain.Models;
 using Domain.Contracts;
 using FluentResults;
 
-namespace Core.Application.Services
+namespace Core.Domain.Services
 {
     public class GenreService : IGenreService
     {
@@ -22,22 +21,19 @@ namespace Core.Application.Services
             return await _genreRepository.GetNumGenres();
         }
 
-        public async Task<List<GenreDto>> GetGenres()
+        public async Task<List<Genre>> GetGenres()
         {
-            var films = await _genreRepository.GetGenres();
-            return _mapper.Map<List<GenreDto>>( films );
+            return await _genreRepository.GetGenres();
         }
 
-        public async Task<Result> CreateGenre( GenreDto genreToCreate )
+        public async Task<Result> CreateGenre( Genre genreToCreate )
         {
-            Genre genre = _mapper.Map<Genre>( genreToCreate );
-            return await _genreRepository.CreateGenre( genre );
+            return await _genreRepository.CreateGenre( genreToCreate );
         }
 
-        public async Task<Result> UpdateGenre( GenreDto genreToUpdate )
+        public async Task<Result> UpdateGenre( Genre genreToUpdate )
         {
-            Genre genre = _mapper.Map<Genre>( genreToUpdate );
-            return await _genreRepository.UpdateGenre( genre );
+            return await _genreRepository.UpdateGenre( genreToUpdate );
         }
 
         public async Task<Result> DeleteGenre( int genreId )

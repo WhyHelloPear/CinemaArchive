@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Core.Application.DTOs;
-using Core.Application.Services;
+using Core.Domain.Models;
+using Core.Domain.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using UI.ViewModels;
@@ -33,9 +33,9 @@ namespace UI.Controllers
         [Route( "CreatePerson" )]
         public async Task<ActionResult<PersonViewModel>> CreatePerson( [FromBody] PersonViewModel newPerson )
         {
-            PersonDto personDto = _mapper.Map<PersonDto>( newPerson );
+            Person person = _mapper.Map<Person>( newPerson );
 
-            var result = await _personService.CreatePerson( personDto );
+            var result = await _personService.CreatePerson( person );
             return Ok();
         }
 
@@ -43,7 +43,7 @@ namespace UI.Controllers
         [Route( "UpdatePerson" )]
         public async Task<ActionResult<PersonViewModel>> UpdatePerson( [FromBody] PersonViewModel personToUpdate )
         {
-            PersonDto hey = _mapper.Map<PersonDto>( personToUpdate );
+            Person hey = _mapper.Map<Person>( personToUpdate );
             Result result = await _personService.UpdatePerson( hey );
 
             return Ok();

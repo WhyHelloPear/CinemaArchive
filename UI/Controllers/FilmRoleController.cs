@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Core.Application.DTOs;
-using Core.Application.Services;
+using Core.Domain.Models;
+using Core.Domain.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using UI.ViewModels;
@@ -24,7 +24,7 @@ namespace UI.Controllers
         [Route( "GetFilmRoles" )]
         public async Task<ActionResult<FilmRoleViewModel>> GetFilmRoles()
         {
-            List<FilmRoleDto> people = await _filmRoleService.GetFilmRoles();
+            List<FilmRole> people = await _filmRoleService.GetFilmRoles();
 
             return Ok( _mapper.Map<List<FilmRoleViewModel>>( people ) );
         }
@@ -33,7 +33,7 @@ namespace UI.Controllers
         [Route( "CreateFilmRole" )]
         public async Task<ActionResult<FilmRoleViewModel>> CreateFilmRole( [FromBody] FilmRoleViewModel newFilmRole )
         {
-            FilmRoleDto filmRoleDto = _mapper.Map<FilmRoleDto>( newFilmRole );
+            FilmRole filmRoleDto = _mapper.Map<FilmRole>( newFilmRole );
 
             Result result = await _filmRoleService.CreateFilmRole( filmRoleDto );
 
@@ -44,7 +44,7 @@ namespace UI.Controllers
         [Route( "UpdateFilmRole" )]
         public async Task<ActionResult<FilmRoleViewModel>> UpdateFilmRole( [FromBody] FilmRoleViewModel newFilmRole )
         {
-            FilmRoleDto filmRoleDto = _mapper.Map<FilmRoleDto>( newFilmRole );
+            FilmRole filmRoleDto = _mapper.Map<FilmRole>( newFilmRole );
 
             Result result = await _filmRoleService.UpdateFilmRole( filmRoleDto );
 

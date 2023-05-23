@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Core.Application.DTOs;
-using Core.Application.Services;
+using Core.Domain.Models;
+using Core.Domain.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using UI.ViewModels;
@@ -38,7 +38,7 @@ namespace UI.Controllers
         [Route( "CreateGenre" )]
         public async Task<IActionResult> SaveGenreAsync( [FromBody] GenreViewModel genreToSave )
         {
-            GenreDto hey = _mapper.Map<GenreDto>( genreToSave );
+            Genre hey = _mapper.Map<Genre>( genreToSave );
             Result test = await _genreService.CreateGenre( hey );
 
             return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
@@ -48,7 +48,7 @@ namespace UI.Controllers
         [Route( "UpdateGenre" )]
         public async Task<IActionResult> UpdateGenreAsync( [FromBody] GenreViewModel genreToUpdate )
         {
-            GenreDto hey = _mapper.Map<GenreDto>( genreToUpdate );
+            Genre hey = _mapper.Map<Genre>( genreToUpdate );
             Result test = await _genreService.UpdateGenre( hey );
 
             return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );

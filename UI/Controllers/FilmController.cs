@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Core.Application.DTOs;
-using Core.Application.Services;
+using Core.Domain.Models;
+using Core.Domain.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using UI.ViewModels;
@@ -33,9 +33,9 @@ namespace UI.Controllers
 
         [HttpGet]
         [Route( "GetFilm" )]
-        public async Task<ActionResult<FilmViewModel>> GetFilm(int id)
+        public async Task<ActionResult<FilmViewModel>> GetFilm( int id )
         {
-            FilmDto film = await _filmService.GetFilm( id );
+            Film film = await _filmService.GetFilm( id );
 
             FilmViewModel value = _mapper.Map<FilmViewModel>( film );
             return base.Ok( value );
@@ -52,7 +52,7 @@ namespace UI.Controllers
         [Route( "CreateFilm" )]
         public async Task<IActionResult> CreateFilmAsync( [FromBody] FilmViewModel film )
         {
-            FilmDto hey = _mapper.Map<FilmDto>( film );
+            Film hey = _mapper.Map<Film>( film );
             Result test = await _filmService.CreateFilm( hey );
 
             return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );
@@ -62,7 +62,7 @@ namespace UI.Controllers
         [Route( "UpdateFilm" )]
         public async Task<IActionResult> UpdateFilmAsync( [FromBody] FilmViewModel film )
         {
-            FilmDto hey = _mapper.Map<FilmDto>( film );
+            Film hey = _mapper.Map<Film>( film );
             Result test = await _filmService.UpdateFilm( hey );
 
             return test.IsSuccess ? Ok( new { isSuccss = test.IsSuccess } ) : BadRequest( new { test.IsSuccess, test.Errors.First().Message } );

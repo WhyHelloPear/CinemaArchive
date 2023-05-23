@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
-using Core.Application.DTOs;
 using Core.Domain.Contracts;
 using Core.Domain.Models;
 using FluentResults;
 
-namespace Core.Application.Services
+namespace Core.Domain.Services
 {
     public class FilmRoleService : IFilmRoleService
     {
@@ -17,9 +16,8 @@ namespace Core.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<Result> CreateFilmRole( FilmRoleDto filmRoleDto )
+        public async Task<Result> CreateFilmRole( FilmRole filmRole )
         {
-            FilmRole filmRole = _mapper.Map<FilmRole>( filmRoleDto );
             int numChanges = await _filmRoleRepository.CreateFilmRole( filmRole );
 
             return numChanges > 0 ? Result.Ok() : Result.Fail( "No changes made" );
@@ -32,16 +30,13 @@ namespace Core.Application.Services
             return Result.FailIf( numChanges == 0, "No Changes Made" );
         }
 
-        public async Task<List<FilmRoleDto>> GetFilmRoles()
+        public async Task<List<FilmRole>> GetFilmRoles()
         {
-            List<FilmRole> filmRoles = await _filmRoleRepository.GetFilmRoles();
-
-            return _mapper.Map<List<FilmRoleDto>>( filmRoles );
+            return await _filmRoleRepository.GetFilmRoles();
         }
 
-        public async Task<Result> UpdateFilmRole( FilmRoleDto filmRoleDto )
+        public async Task<Result> UpdateFilmRole( FilmRole roleToUpdate )
         {
-            FilmRole roleToUpdate = _mapper.Map<FilmRole>( filmRoleDto );
             int numChangesMade = await _filmRoleRepository.UpdateFilmRole( roleToUpdate );
 
             return Result.OkIf( numChangesMade > 0, "No changes made" );

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Core.Application.DTOs;
 using Core.Domain.Models;
 using Infrastructure.DataAccess.Entities;
 using UI.ViewModels;
@@ -8,24 +7,24 @@ public class UIMappingConfig : Profile
 {
     public UIMappingConfig()
     {
-        CreateMap<FilmDto, FilmViewModel>()
+        CreateMap<Film, FilmViewModel>()
             .ReverseMap();
 
-        CreateMap<GenreDto, GenreViewModel>()
+        CreateMap<Genre, GenreViewModel>()
             .ReverseMap();
 
-        CreateMap<PersonDto, PersonViewModel>()
+        CreateMap<Person, PersonViewModel>()
             .ReverseMap();
 
-        CreateMap<FilmRoleDto, FilmRoleViewModel>()
+        CreateMap<FilmRole, FilmRoleViewModel>()
             .ReverseMap();
 
-        CreateMap<FilmPersonLinkDto, FilmPersonLinkViewModel>()
-            .ForMember( vm => vm.FilmRoleId, m => m.MapFrom( dto => dto.FilmRole.FilmRoleId ) )
-            .ForMember( vm => vm.PersonId, m => m.MapFrom( dto => dto.Person.PersonId ) )
+        CreateMap<FilmPersonLink, FilmPersonLinkViewModel>()
+            .ForMember( vm => vm.FilmRoleId, m => m.MapFrom( dto => dto.RelatedFilmRole.FilmRoleId ) )
+            .ForMember( vm => vm.PersonId, m => m.MapFrom( dto => dto.RelatedPerson.PersonId ) )
             .ForMember( vm => vm.FilmPersonLinkId, m => m.MapFrom( dto => dto.FilmPersonLinkId ) )
-            .ForMember( vm => vm.PersonFirstName, m => m.MapFrom( dto => dto.Person.FirstName ) )
-            .ForMember( vm => vm.FilmRoleName, m => m.MapFrom( dto => dto.FilmRole.FilmRoleName ) )
-            .ForMember( vm => vm.PersonLastName, m => m.MapFrom( dto => dto.Person.LastName ) );
+            .ForMember( vm => vm.PersonFirstName, m => m.MapFrom( dto => dto.RelatedPerson.FirstName ) )
+            .ForMember( vm => vm.FilmRoleName, m => m.MapFrom( dto => dto.RelatedFilmRole.FilmRoleName ) )
+            .ForMember( vm => vm.PersonLastName, m => m.MapFrom( dto => dto.RelatedPerson.LastName ) );
     }
 }
