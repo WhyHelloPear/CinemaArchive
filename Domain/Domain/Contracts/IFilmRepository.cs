@@ -1,7 +1,7 @@
 ﻿using Core.Domain.Models;
 using FluentResults;
 
-namespace Domain.Contracts
+namespace Core.Domain.Contracts
 {
     public interface IFilmRepository
     {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Core.Domain.Contracts;
 using Core.Domain.Models;
-using Domain.Contracts;
 using FluentResults;
 using Infrastructure.DataAccess.Contexts;
 using Infrastructure.DataAccess.Entities;
@@ -69,10 +69,10 @@ namespace Infrastructure.DataAccess.Repositories
         public async Task<Film> GetFilm( int id )
         {
             FilmEntity? existingFilm = await _dbContext.FilmEntities
-                .Include(f => f.FilmGenreLinks)
+                .Include( f => f.FilmGenreLinks )
 
-                .Include(f => f.FilmPersonLinks)
-                    .ThenInclude(fpl => fpl.Person)
+                .Include( f => f.FilmPersonLinks )
+                    .ThenInclude( fpl => fpl.Person )
                 .Include( f => f.FilmPersonLinks )
                     .ThenInclude( fpl => fpl.FilmRole )
 

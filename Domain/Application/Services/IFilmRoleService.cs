@@ -1,7 +1,7 @@
 ﻿using Core.Domain.Models;
 using FluentResults;
 
-namespace Core.Domain.Services
+namespace Core.Application.Services
 {
     public interface IFilmRoleService
     {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Core.Domain.Contracts;
 using Core.Domain.Models;
-using Domain.Contracts;
 using FluentResults;
 using Infrastructure.DataAccess.Contexts;
 using Infrastructure.DataAccess.Entities;

@@ -1,14 +1,14 @@
 ﻿using Core.Domain.Models;
 using FluentResults;
 
-namespace Domain.Contracts
+namespace Core.Application.Services
 {
-    public interface IGenreRepository
+    public interface IGenreService
     {
-        Task<int> GetNumGenres();
         Task<List<Genre>> GetGenres();
         Task<Result> CreateGenre( Genre genreToCreate );
         Task<Result> UpdateGenre( Genre genreToUpdate );
         Task<Result> DeleteGenre( int genreId );
+        Task<int> GetGenreCount();
     }
 }

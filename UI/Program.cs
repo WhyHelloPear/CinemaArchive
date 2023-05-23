@@ -1,6 +1,5 @@
+using Core.Application.Services;
 using Core.Domain.Contracts;
-using Core.Domain.Services;
-using Domain.Contracts;
 using Infrastructure.DataAccess.Contexts;
 using Infrastructure.DataAccess.Repositories;
 

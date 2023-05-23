@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using Core.Domain.Contracts;
 using Core.Domain.Models;
-using Domain.Contracts;
 using FluentResults;
 
-namespace Core.Domain.Services
+namespace Core.Application.Services
 {
     public class GenreService : IGenreService
     {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Core.Application.Services;
 using Core.Domain.Models;
-using Core.Domain.Services;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using UI.ViewModels;

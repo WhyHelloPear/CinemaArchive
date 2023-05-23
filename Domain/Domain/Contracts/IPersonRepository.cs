@@ -1,6 +1,6 @@
 ﻿using Core.Domain.Models;
 
-namespace Domain.Contracts
+namespace Core.Domain.Contracts
 {
     public interface IPersonRepository
     {
