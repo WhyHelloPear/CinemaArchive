@@ -19,11 +19,9 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngIf="people.length == 0">
-        <tr>
-          you're ugly
-        </tr>
-      </ng-container>
+      <tr *ngIf="people.length == 0">
+        Unfortunately, everyone's gone...unless you view that as a positive thing
+      </tr>
       <ng-container *ngIf="people.length > 0">
         <tr *ngFor="let person of people">
           <td>{{person.firstName}}</td>

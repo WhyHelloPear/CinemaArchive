@@ -16,11 +16,9 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngIf="filmRoles.length == 0">
-        <tr>
-          <td colspan="2">fuck you</td>
-        </tr>
-      </ng-container>
+      <tr *ngIf="filmRoles.length == 0">
+        <td colspan="2">No need to worry, we'll find a role for you eventually</td>
+      </tr>
       <ng-container *ngIf="filmRoles.length > 0">
         <tr *ngFor="let filmRole of filmRoles">
           <td class="col-sm-3">{{filmRole.filmRoleName}}</td>

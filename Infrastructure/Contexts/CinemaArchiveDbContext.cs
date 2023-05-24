@@ -17,7 +17,7 @@ namespace Infrastructure.DataAccess.Contexts
             //things to change
             //store connection string in appsetting and have the connection string injected into the context
             //enable encryption for sql server
-            optionsBuilder.UseSqlServer( "Server=localhost;Database=CinemaArchive;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=false" );
+            optionsBuilder.UseSqlServer( "Server=localhost, 1433;Database=CinemaArchive;User Id=sa;Password=1h34RdY0u$meLLb4d;MultipleActiveResultSets=true;Encrypt=false" );
         }
 
         protected override void OnModelCreating( ModelBuilder modelBuilder )
